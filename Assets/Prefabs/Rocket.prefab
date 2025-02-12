@@ -65,7 +65,7 @@ MonoBehaviour:
   applyHeatArea: 1
   originalColor: {r: 1, g: 1, b: 1, a: 1}
   heatColor: {r: 1, g: 0, b: 0, a: 1}
-  fuel: 100
+  fuelVariable: {fileID: 11400000, guid: bc34bd16ed73bab4fbea070f35dda222, type: 2}
   currentHeat: 0
   heatTime: 2
   state: 0

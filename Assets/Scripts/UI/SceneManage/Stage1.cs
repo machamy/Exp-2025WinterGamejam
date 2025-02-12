@@ -27,14 +27,6 @@ public class Stage1 : MonoBehaviour
     {
         settingsPopup.SetActive(false);
     }
-    public void FuelDecrease()
-    {
-        fuelStatus.DecreaseFuel(1);
-    }
-    public void FuelSet()
-    {
-        fuelStatus.SetFuel(25);
-    }
 
 
 

@@ -659,7 +659,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &152874497
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1977,25 +1977,13 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8894316685461762677, guid: 4fdf8828c598bac41afa8086e9f9e0c7, type: 3}
-      propertyPath: speed
-      value: 1.5
-      objectReference: {fileID: 0}
+      propertyPath: fuelVariable
+      value: 
+      objectReference: {fileID: 11400000, guid: bc34bd16ed73bab4fbea070f35dda222, type: 2}
     - target: {fileID: 8894316685461762677, guid: 4fdf8828c598bac41afa8086e9f9e0c7, type: 3}
-      propertyPath: maxFuel
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 8894316685461762677, guid: 4fdf8828c598bac41afa8086e9f9e0c7, type: 3}
-      propertyPath: boostCost
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 8894316685461762677, guid: 4fdf8828c598bac41afa8086e9f9e0c7, type: 3}
-      propertyPath: boostSpeed
-      value: 7
-      objectReference: {fileID: 0}
-    - target: {fileID: 8894316685461762677, guid: 4fdf8828c598bac41afa8086e9f9e0c7, type: 3}
-      propertyPath: rotateCost
-      value: 0.5
-      objectReference: {fileID: 0}
+      propertyPath: passengerListVariable
+      value: 
+      objectReference: {fileID: 11400000, guid: fc3b04ae3d19e8a4fafb243726f8b6c3, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -5107,7 +5095,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1259863611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8332,9 +8320,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34329754e28561f4499f54fa53b327c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FuelVariableSo: {fileID: 11400000, guid: bc34bd16ed73bab4fbea070f35dda222, type: 2}
   fuelStatus: {fileID: 2123268550}
   fuelImage: {fileID: 2123268549}
-  fuel: 25
 --- !u!114 &2123268551
 MonoBehaviour:
   m_ObjectHideFlags: 0

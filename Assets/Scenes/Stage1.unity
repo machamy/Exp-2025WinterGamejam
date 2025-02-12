@@ -5289,9 +5289,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34329754e28561f4499f54fa53b327c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FuelVariableSo: {fileID: 0}
   fuelStatus: {fileID: 733783956}
   fuelImage: {fileID: 733783953}
-  fuel: 25
 --- !u!4 &734735583 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5710260631187047063, guid: 2c386e33c62d9f841afe79dcab2a0353, type: 3}
@@ -6298,7 +6298,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &952797199
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8865,7 +8865,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1307351972
 MonoBehaviour:
   m_ObjectHideFlags: 0

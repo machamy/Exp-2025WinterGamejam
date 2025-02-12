@@ -1,2 +1,14 @@
 fileFormatVersion: 2
 guid: 34329754e28561f4499f54fa53b327c1
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - FuelVariableSo: {fileID: 11400000, guid: bc34bd16ed73bab4fbea070f35dda222, type: 2}
+  - fuelStatus: {instanceID: 0}
+  - fuelImage: {instanceID: 0}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

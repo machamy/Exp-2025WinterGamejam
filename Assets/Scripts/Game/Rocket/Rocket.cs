@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using DefaultNamespace.Game;
 using NUnit.Framework;
 using UnityEngine;
@@ -15,6 +16,7 @@ public class Rocket : MonoBehaviour
     [SerializeField]private SpriteRenderer spriteRenderer;
     [Header("Event Channel")]
     [SerializeField] private AlertEventChannel alertEventChannel;
+    // [SerializeField] private FloatVariableSO fuelVariableChannel;
 
     [Header("Rocket Settings(Movement)")]
     [SerializeField] private bool useAngularVelocity = false;
@@ -30,9 +32,9 @@ public class Rocket : MonoBehaviour
     [SerializeField] private bool applyHeatArea = true;
     [SerializeField] private Color originalColor = Color.white;
     [SerializeField] private Color heatColor = Color.red;
-    
-    [Header("Rocket State")]
-    [SerializeField] private float fuel = 100f;
+
+    [Header("Rocket State")] [SerializeField]
+    private FloatVariableSO fuelVariable;
     [SerializeField] private float currentHeat = 0f;
     [SerializeField] private float heatTime = 2f;
     [SerializeField] private RocketState state = RocketState.None;
@@ -40,13 +42,19 @@ public class Rocket : MonoBehaviour
     
     private HashSet<GravityArea> gravityAreas = new HashSet<GravityArea>();
     private HashSet<HeatArea> heatAreas = new HashSet<HeatArea>();
-    public float Fuel => fuel;
+
+    public float Fuel
+    {
+        get => fuelVariable.Value;
+        private set => fuelVariable.Value = value;
+    }
     public bool IsOnHeat => heatAreas.Count > 0;
     public float CurrentHeat => currentHeat;
     public float RemainingHeatTime => heatTime - currentHeat;
     public bool IsAbsAttached => state == RocketState.Attached || state == RocketState.BreakingAttached;
     [Header("Passenger")]
     [SerializeField] private List<int> passengers = new List<int>();
+    // [SerializeField] private FloatListVariableSO passengerListVariable;
     [SerializeField] private float[] sizeArr = new []{1f,1.3f,1.69f,2.2f,2.86f};
     [SerializeField] private float[] fuelArr = new []{25f,20f,15f,10f,5f};
     public int PassengerCount => passengers.Count;
@@ -91,7 +99,7 @@ public class Rocket : MonoBehaviour
         if(!spriteRenderer)
             spriteRenderer = GetComponent<SpriteRenderer>();
         rbody.gravityScale = 0;
-        fuel = maxFuel;
+        Fuel = maxFuel;
         previousPosition = transform.position;
         deltaPosition = Vector2.zero;
         rbody.centerOfMass = Vector2.up;
@@ -125,7 +133,7 @@ public class Rocket : MonoBehaviour
 
     public void StartBoost()
     {
-        if(fuel <= 0) return;
+        if(Fuel <= 0) return;
         IsBoosting = true;
     }
     
@@ -216,7 +224,7 @@ public class Rocket : MonoBehaviour
     public void UpdatePassengerState()
     {
         maxFuel = fuelArr[passengers.Count];
-        fuel = maxFuel;
+        Fuel = maxFuel;
         transform.localScale = Vector3.one * sizeArr[passengers.Count];
     }
 
@@ -231,10 +239,10 @@ public class Rocket : MonoBehaviour
             UpdateSpeed();
         if (State == RocketState.BreakingAttached || IsBoosting && State!=RocketState.Dead)
         {
-            fuel -= boostCost * Time.fixedDeltaTime;
-            if (fuel <= 0)
+            Fuel -= boostCost * Time.fixedDeltaTime;
+            if (Fuel <= 0)
             {
-                fuel = 0;
+                Fuel = 0;
                 EndBoost();
             }
         }
@@ -271,24 +279,28 @@ public class Rocket : MonoBehaviour
     
     public void PointDirection(Vector2 dir,bool useFuel = true, bool updateSpeed = true)
     {
+        if(useFuel && Fuel <= 0)
+            return;
         // transform.up = dir.normalized;
         var rot = Quaternion.LookRotation(Vector3.forward, dir).eulerAngles.z;
          // print(rot);
         rbody.SetRotation(rot);
         // print(rot);
-        fuel -= rotateCost;
+        Fuel -= rotateCost;
         if(updateSpeed)
             UpdateSpeed();
     }
 
     public void PointDirectionSmooth(Vector2 dir, float smoothness,bool useFuel = true,bool updateSpeed = true)
     {
+        if(useFuel && Fuel <= 0)
+            return;
         var targetRot = Quaternion.LookRotation(Vector3.forward, dir).eulerAngles.z;
         var currentRot = rbody.rotation;
         var newRot = Mathf.LerpAngle(currentRot, targetRot, smoothness * Time.fixedDeltaTime);
         rbody.SetRotation(newRot);
         if(useFuel)
-            fuel -= rotateCost;
+            Fuel -= rotateCost;
         // fuel -= rotateCost;
         if(updateSpeed)
          UpdateSpeed();

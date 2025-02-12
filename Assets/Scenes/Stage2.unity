@@ -6350,9 +6350,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34329754e28561f4499f54fa53b327c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  FuelVariableSo: {fileID: 11400000, guid: bc34bd16ed73bab4fbea070f35dda222, type: 2}
   fuelStatus: {fileID: 1512086977}
   fuelImage: {fileID: 1512086976}
-  fuel: 25
 --- !u!114 &1512086978
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8338,7 +8338,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1970822793
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8418,7 +8418,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1973967670
 MonoBehaviour:
   m_ObjectHideFlags: 0
