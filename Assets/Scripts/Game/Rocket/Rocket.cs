@@ -5,10 +5,11 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(Rigidbody2D))]
 public class Rocket : MonoBehaviour
 {
-    private TouchInputManager touchInputManager;
+
     private Rigidbody2D rbody;
 
     [Header("Rocket Settings")]
+    [SerializeField] private bool updateSpeedOnTick = true;
     [SerializeField] private float speed = 5f;
     [SerializeField] private float boostSpeed = 10f;
     [SerializeField] private float maxFuel = 100f;
@@ -16,6 +17,9 @@ public class Rocket : MonoBehaviour
     [Header("Rocket State")]
     [SerializeField] private float fuel = 100f;
     [SerializeField] private RocketState state = RocketState.None;
+    
+    
+    public float Fuel => fuel;
     public RocketState State
     {
         get => state;
@@ -36,72 +40,11 @@ public class Rocket : MonoBehaviour
     
     private void Awake()
     {
-        touchInputManager = TouchInputManager.Instance;
         rbody = GetComponent<Rigidbody2D>();
         rbody.gravityScale = 0;
         fuel = maxFuel;
     }
-
-    private void OnEnable()
-    {
-        if(touchInputManager == null)
-            touchInputManager = TouchInputManager.Instance;
-        // TouchInputManager.Instance.OnTouchDown += OnTouchDown;
-        touchInputManager.OnTouching += OnTouching;
-        touchInputManager.OnTouchUp += OnTouchUp;
-        touchInputManager.OnDragging += OnDragging;
-        touchInputManager.OnDragEnd += OnDragEnd;  
-    }
-    
-    private void OnDisable()
-    {
-        // TouchInputManager.Instance.OnTouchDown -= OnTouchDown;
-        touchInputManager.OnTouching -= OnTouching;
-        touchInputManager.OnTouchUp -= OnTouchUp;
-        touchInputManager.OnDragging -= OnDragging;
-        touchInputManager.OnDragEnd -= OnDragEnd;  
-    }
-
-    #region 인풋 이벤트 핸들러
-    // private void OnTouchDown(int id, Vector2 pos)
-    // {
-    //     Debug.Log($"OnTouchDown {id} : {pos}");
-    // }
-    
-    
-    // 드래그 중에 부스트 X
-    private int lastBoostId = -1;
-    private void OnTouching(int id, Vector2 pos)
-    {
-        if (State == RocketState.Normal)
-        {
-            lastBoostId = id;
-            StartBoost();
-        }
-    }
-    
-    private void OnTouchUp(int id, Vector2 pos)
-    {
-        if (State == RocketState.Boosting)
-        {
-            // if (lastBoostId == id)
-            EndBoost();
-        }
-    }
-    
-    private void OnDragging(int id, Vector2 pos, Vector2 endPos)
-    {
-        
-    }
-    
-
-    private void OnDragEnd(int id, Vector2 pos, Vector2 endPos)
-    {
-        Vector2 direction = endPos - pos;
-        PointDirection(direction);
-    }
-    
-    #endregion
+   
 
     // public Vector2 NormalVelocity => transform.up * speed;
     // public Vector2 BoostVelocity => transform.up * boostSpeed;
@@ -110,7 +53,7 @@ public class Rocket : MonoBehaviour
         get
         {
             float rot = rbody.rotation;
-            print(rot);
+            // print(rot);
             return new Vector2(-Mathf.Sin(rot * Mathf.Deg2Rad), Mathf.Cos(rot * Mathf.Deg2Rad));
         }
     }
@@ -159,7 +102,8 @@ public class Rocket : MonoBehaviour
 
     private void FixedUpdate()
     {
-        print(up);
+        if (updateSpeedOnTick)
+            UpdateSpeed();
         if (State == RocketState.Boosting)
         {
             fuel -= boostCost * Time.fixedDeltaTime;
@@ -170,9 +114,28 @@ public class Rocket : MonoBehaviour
             }
         }
     }
+
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+    }
     
+    private void OnCollisionExit2D(Collision2D other)
+    {
+        
+    }
     
-    
+    private void OnTriggerExit(Collider other)
+    {
+        
+    }
+
     private void Move()
     {
         
@@ -192,5 +155,10 @@ public class Rocket : MonoBehaviour
         rbody.SetRotation(rot);
         // print(rot);
         UpdateSpeed();
+    }
+
+    public void Die()
+    {
+        
     }
 }

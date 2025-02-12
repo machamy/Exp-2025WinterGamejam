@@ -53,6 +53,10 @@ public class SplineObject : MonoBehaviour
         if(useSplinePosition)
         {
             transform.position = splineContainer.transform.TransformPoint(targetPosition);
+            // print($"spline : {splineContainer.transform.position}");
+            // print($"target : {targetPosition}");
+            // print($"transform : {splineContainer.transform.TransformPoint(targetPosition)}");
+            // print($"other : {splineContainer.transform.position + targetPosition}");
         }
         if(!isReversed && tRevolution>=1f)
         {
@@ -82,5 +86,13 @@ public class SplineObject : MonoBehaviour
     private void Rotate()
     {
         transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z + rotationSpeed * Time.fixedDeltaTime);
+    }
+
+    private void OnValidate()
+    {
+        if (useSplinePosition)
+        {
+            transform.position = splineContainer.transform.position;
+        }
     }
 }
