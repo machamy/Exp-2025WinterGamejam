@@ -12,7 +12,7 @@ public class Stage2ClosingTextPopup : MonoBehaviour
     public TMP_Text ChatText;      // 실제 채팅이 나오는 텍스트
     public TMP_Text CharacterName; // 캐릭터 이름이 나오는 텍스트
     public GameObject ClosingTextPanel;  // 클로징 스크립트 패널
-    
+    [SerializeField] private Rocket rocket;
     public Button NextButton;
     public Button SelectButton1;
     public Button SelectButton2;
@@ -207,7 +207,10 @@ public class Stage2ClosingTextPopup : MonoBehaviour
 
     IEnumerator TextSelect1() //("등장인물", "대사")로 입력
     {
-        
+        //스테이지 2 캐릭터 로켓 탑승 여부
+        istakenStage2 = true;
+        Debug.Log(istakenStage2);
+
         yield return StartCoroutine(NormalChat("별하나", "야호! 모험을 떠나 볼까?"));
        
         yield return StartCoroutine(NormalChat("", "별하나는 신난다는 듯이 당신의 로켓에 뛰어 갑니다."));
@@ -232,6 +235,11 @@ public class Stage2ClosingTextPopup : MonoBehaviour
         //Player.SetActive(true);
 
         //Fuel.SetActive(true);
+        if (istakenStage2)
+        {
+            rocket.AddPassenger(1);
+            Debug.Log(rocket.PassengerCount);
+        }
 
     }
 }

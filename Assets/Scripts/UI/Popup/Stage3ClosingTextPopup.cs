@@ -12,7 +12,7 @@ public class Stage3ClosingTextPopup : MonoBehaviour
     public TMP_Text ChatText;      // 실제 채팅이 나오는 텍스트
     public TMP_Text CharacterName; // 캐릭터 이름이 나오는 텍스트
     public GameObject ClosingTextPanel;  // 클로징 스크립트 패널
-    
+    [SerializeField] private Rocket rocket;
     public Button NextButton;
     public Button SelectButton1;
     public Button SelectButton2;
@@ -88,6 +88,7 @@ public class Stage3ClosingTextPopup : MonoBehaviour
         StartCoroutine(FadeOutBranchButton(SelectButton1, 1f));
         // 다른 버튼도 함께 서서히 투명화
         StartCoroutine(FadeOutBranchButton(SelectButton2, 1f));
+        
         
         // 선택지 1에 대한 분기 시나리오 코루틴 시작
         StartCoroutine(TextSelect1());
@@ -208,11 +209,15 @@ public class Stage3ClosingTextPopup : MonoBehaviour
 
     IEnumerator TextSelect1() //("등장인물", "대사")로 입력
     {
-        
+        //스테이지 3 캐릭터 로켓 탑승 여부
+        istakenStage3 = true;
+        Debug.Log(istakenStage3);
+        rocket.AddPassenger(1);
+        Debug.Log(rocket.PassengerCount);
         yield return StartCoroutine(NormalChat("", "별그물의 입가에 희미하게 미소가 번졌다."));
        
         yield return StartCoroutine(NormalChat("", "별그물은 당신의 손에 살포시 손을 올려놓고 천천히 로켓으로 올라탔습니다."));
-        CloseClosingText();
+        StartCoroutine(EndingText());
     }
     IEnumerator TextSelect2() //("등장인물", "대사")로 입력
     {
@@ -220,20 +225,38 @@ public class Stage3ClosingTextPopup : MonoBehaviour
         yield return StartCoroutine(NormalChat("포리아", "음..그래.."));
 
         yield return StartCoroutine(NormalChat("", "별그물은 천천히 뒤돌아섰습니다. 혹시 벌써 후회하고 있나요?"));
-        CloseClosingText();
+        StartCoroutine(EndingText());
     }
 
+    
+
+    IEnumerator EndingText()
+    {
+        if (Stage1ClosingTextPopup.istakenStage1)
+        {
+            yield return StartCoroutine(NormalChat("점슬이", "..."));
+        }
+        if (Stage2ClosingTextPopup.istakenStage2)
+        {
+            yield return StartCoroutine(NormalChat("별하나", "정말 고마워!! 덕분에 살았어"));
+        }
+        if (istakenStage3)
+        {
+            yield return StartCoroutine(NormalChat("별그물", "고마워…"));
+        }
+        CloseClosingText();
+    }
     void CloseClosingText()
     {
 
         ClosingTextPanel.SetActive(false); // 패널 비활성화
         isFirstTime1 = false;
         Time.timeScale = 1f;
-        
+
         //Player.SetActive(true);
-        
+
         //Fuel.SetActive(true);
-        
+
     }
 }
 

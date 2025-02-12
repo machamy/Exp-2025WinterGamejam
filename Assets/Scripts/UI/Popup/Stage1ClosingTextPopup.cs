@@ -12,7 +12,7 @@ public class Stage1ClosingTextPopup : MonoBehaviour
     public TMP_Text ChatText;      // 실제 채팅이 나오는 텍스트
     public TMP_Text CharacterName; // 캐릭터 이름이 나오는 텍스트
     public GameObject ClosingTextPanel;  // 클로징 스크립트 패널
-    
+    [SerializeField] private Rocket rocket;
     public Button NextButton;
     public Button SelectButton1;
     public Button SelectButton2;
@@ -46,12 +46,7 @@ public class Stage1ClosingTextPopup : MonoBehaviour
         ClosingTextPanel.SetActive(true);
         Time.timeScale = 0f; // 게임을 일시정지하고 대화만 진행
 
-        // 버튼 리스너 세팅(중복 등록 방지 위해 먼저 RemoveAllListeners)
-        NextButton.onClick.RemoveAllListeners();
-        
-        SelectButton1.onClick.RemoveAllListeners();
-        SelectButton2.onClick.RemoveAllListeners();
-
+      
         // 버튼 클릭시 동작 연결
         NextButton.onClick.AddListener(OnNextButtonClicked);
         
@@ -79,8 +74,10 @@ public class Stage1ClosingTextPopup : MonoBehaviour
             isNextButtonClicked = true;
         }
     }
+    
     public void OnSelectButton1Clicked()
     {
+        
         // 양쪽 버튼 모두 즉시 클릭불가
         SelectButton1.interactable = false;
         SelectButton2.interactable = false;
@@ -89,7 +86,7 @@ public class Stage1ClosingTextPopup : MonoBehaviour
         // 다른 버튼도 함께 서서히 투명화
         StartCoroutine(FadeOutBranchButton(SelectButton2, 1f));
         
-        
+
         // 선택지 1에 대한 분기 시나리오 코루틴 시작
         StartCoroutine(TextSelect1());
     }
@@ -208,6 +205,10 @@ public class Stage1ClosingTextPopup : MonoBehaviour
 
     IEnumerator TextSelect1() //("등장인물", "대사")로 입력
     {
+
+        //스테이지 1 캐릭터 로켓 탑승 여부
+        istakenStage1 = true;
+        Debug.Log(istakenStage1);
         
         yield return StartCoroutine(NormalChat("점슬이", "흥~♡ 내가 원해서 따라가는게 아니라구!"));
        
@@ -233,7 +234,11 @@ public class Stage1ClosingTextPopup : MonoBehaviour
         //Player.SetActive(true);
 
         //Fuel.SetActive(true);
-
+        if (istakenStage1)
+        {
+            rocket.AddPassenger(1);
+            Debug.Log(rocket.PassengerCount);
+        }
     }
 }
 
