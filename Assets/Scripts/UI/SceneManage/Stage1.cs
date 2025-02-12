@@ -1,16 +1,41 @@
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
+
 
 public class Stage1 : MonoBehaviour
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    
+    public void LoadStageSelect()
     {
-        
+        SceneManager.LoadScene("StageSelect");
     }
 
-    // Update is called once per frame
-    void Update()
+    public GameObject settingsPopup; // ¼³Á¤ ÆË¾÷
+    public GameObject StageSelectPopup; // ½ºÅ×ÀÌÁö ¼±ÅÃ ÆË¾÷
+
+    // ¼³Á¤ ÆË¾÷ ¿­±â
+    public void OpenSettings()
     {
-        
+        settingsPopup.SetActive(true);
     }
+
+    // ¼³Á¤ ÆË¾÷ ´Ý±â
+    public void CloseSettings()
+    {
+        settingsPopup.SetActive(false);
+    }
+    public void FuelDecrease()
+    {
+        FuelStatus.Instance.TriggerFuelDecrease();
+    }
+    public void FuelSet()
+    {
+        FuelStatus.Instance.FuelSet(25);
+    }
+
+
+
 }
