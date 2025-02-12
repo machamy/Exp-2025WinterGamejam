@@ -193,6 +193,11 @@ public class Rocket : MonoBehaviour
         UpdatePassengerState();
     }
     
+    public List<int> GetPassenger()
+    {
+        return new List<int>(passengers);
+    }
+    
     public void ClearPassenger()
     {
         passengers.Clear();
