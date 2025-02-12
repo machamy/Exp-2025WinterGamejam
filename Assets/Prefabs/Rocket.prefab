@@ -55,11 +55,11 @@ MonoBehaviour:
   alertEventChannel: {fileID: 11400000, guid: 399852c8c721a734494a5c93e2ee95ee, type: 2}
   useAngularVelocity: 0
   updateSpeedOnTick: 1
-  speed: 1
-  boostSpeed: 10
+  speed: 1.5
+  boostSpeed: 7
   maxFuel: 100
-  boostCost: 1
-  rotateCost: 1
+  boostCost: 2
+  rotateCost: 0.5
   applyGravityArea: 1
   gravityRotationSpeed: 5
   applyHeatArea: 1
@@ -67,7 +67,7 @@ MonoBehaviour:
   heatColor: {r: 1, g: 0, b: 0, a: 1}
   fuelVariable: {fileID: 11400000, guid: bc34bd16ed73bab4fbea070f35dda222, type: 2}
   currentHeat: 0
-  heatTime: 2
+  heatTime: 4
   state: 0
   isBoosting: 0
   passengers: 
