@@ -3,13 +3,13 @@ using UnityEngine;
 
 namespace DefaultNamespace.Game
 {
-    public class HeatArea : MonoBehaviour
+    public class HeatArea : BaseArea
     {
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.TryGetComponent<Rocket>(out var rocket))
             {
-                rocket.HeatAreaEnter();
+                rocket.OnHeatAreaEnter(this);
             }
         }
         
@@ -17,7 +17,7 @@ namespace DefaultNamespace.Game
         {
             if (other.TryGetComponent<Rocket>(out var rocket))
             {
-                rocket.HeatAreaExit();
+                rocket.OnHeatAreaExit(this);
             }
         }
     }

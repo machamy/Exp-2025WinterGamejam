@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace DefaultNamespace.Game
 {
-    public class GravityArea : MonoBehaviour
+    public class GravityArea : BaseArea
     {
         [SerializeField] private float gravity = 1f;
         public float Gravity => gravity;

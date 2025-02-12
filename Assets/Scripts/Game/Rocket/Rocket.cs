@@ -21,20 +21,22 @@ public class Rocket : MonoBehaviour
     [SerializeField] private float maxFuel = 100f;
     [SerializeField] private float boostCost =  1f;
     [SerializeField] private float rotateCost = 1f;
-    [SerializeField] private bool applayGravityArea = true;
+    [FormerlySerializedAs("applayGravityArea")] [SerializeField] private bool applyGravityArea = true;
     [SerializeField] private float gravityRotationSpeed = 1f;
+    [SerializeField] private bool applyHeatArea = true;
+    
     
     [Header("Rocket State")]
     [SerializeField] private float fuel = 100f;
-    [SerializeField] private bool isOnHeat = false;
     [SerializeField] private float currentHeat = 0f;
     [SerializeField] private float heatTime = 2f;
     [SerializeField] private RocketState state = RocketState.None;
     [SerializeField] private bool isBoosting = false;
     
     private HashSet<GravityArea> gravityAreas = new HashSet<GravityArea>();
+    private HashSet<HeatArea> heatAreas = new HashSet<HeatArea>();
     public float Fuel => fuel;
-    public bool IsOnHeat => isOnHeat;
+    public bool IsOnHeat => heatAreas.Count > 0;
     public float CurrentHeat => currentHeat;
     public float RemainingHeatTime => heatTime - currentHeat;
     public bool IsAbsAttached => state == RocketState.Attached || state == RocketState.BreakingAttached;
@@ -72,7 +74,8 @@ public class Rocket : MonoBehaviour
         Normal,
         Attached,
         BreakingAttached,
-        Dead
+        Dead,
+        Clear
     }
     
     private void Awake()
@@ -145,7 +148,7 @@ public class Rocket : MonoBehaviour
                 break;
         }
 
-        if (applayGravityArea)
+        if (applyGravityArea)
         {
             Vector2 gravity = Vector2.zero;
             foreach (var area in gravityAreas)
@@ -275,34 +278,48 @@ public class Rocket : MonoBehaviour
          UpdateSpeed();
     }
     
-    public void HeatAreaEnter()
+    public void OnHeatAreaEnter(HeatArea area)
     {
-        isOnHeat = true;
-        StartCoroutine(HeatRoutine());
+        if (heatAreas.Contains(area))
+        {
+            return;
+        }
+        if(!IsOnHeat)
+            StartCoroutine(HeatRoutine());
+        heatAreas.Add(area);
         
         // TODO : UI 나오게
     }
     
     private IEnumerator HeatRoutine()
     {
-        if(!isOnHeat) 
+        if(!IsOnHeat) 
             yield break;
         while (currentHeat < heatTime)
         {
             yield return new WaitForFixedUpdate();
             currentHeat += Time.fixedDeltaTime;
-            if(!isOnHeat)
+            if(!IsOnHeat)
                 break;
         }
         Die();
     }
     
-    public void HeatAreaExit()
+    public void OnHeatAreaExit(HeatArea area)
     {
-        isOnHeat = false;
-        currentHeat = 0;
+        if(!heatAreas.Contains(area))
+            return;
+        heatAreas.Remove(area);
+        if(!IsOnHeat)
+            currentHeat = 0;
     }
 
+    public void OnClearAreaEnter()
+    {
+        // TODO : CLEAR
+        Debug.Log("Clear!!!");
+        State = RocketState.Clear;
+    }
     
     public void AddGravityArea(GravityArea area)
     {
