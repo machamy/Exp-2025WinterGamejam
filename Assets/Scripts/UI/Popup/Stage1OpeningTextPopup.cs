@@ -41,6 +41,7 @@ public class Stage1OpeningTextPopup : MonoBehaviour
 
     void Open()
     {
+        GameManager.Instance.State = GameManager.GameState.Dialog;
         OpeningTextPanel.SetActive(true);
         Time.timeScale = 0f; // 게임을 일시정지하고 대화만 진행할 경우 (원하시면 조절)
 
@@ -120,7 +121,7 @@ public class Stage1OpeningTextPopup : MonoBehaviour
 
     void CloseOpeningText()
     {
-
+        GameManager.Instance.State = GameManager.GameState.Running;
         OpeningTextPanel.SetActive(false); // 패널 비활성화
         
         Time.timeScale = 1f;

@@ -43,6 +43,7 @@ public class Stage1ClosingTextPopup : MonoBehaviour
 
     void Open()
     {
+        GameManager.Instance.State = GameManager.GameState.Dialog;
         ClosingTextPanel.SetActive(true);
         Time.timeScale = 0f; // 게임을 일시정지하고 대화만 진행
 
@@ -226,7 +227,7 @@ public class Stage1ClosingTextPopup : MonoBehaviour
 
     void CloseClosingText()
     {   
-        
+        GameManager.Instance.State = GameManager.GameState.Running;
         ClosingTextPanel.SetActive(false); // 패널 비활성화
         isFirstTime1 = false;
         Time.timeScale = 1f;

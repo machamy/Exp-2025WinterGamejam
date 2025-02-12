@@ -10,8 +10,19 @@ public class DestinationIndicator : MonoBehaviour
     private void Awake()
     {
         mainCamera = Camera.main;
-        clearArea.OnBecameVisibleEvent += OnClearAreaVisible;
-        clearArea.OnBecameInvisibleEvent += OnClearAreaInvisible;
+        if(clearArea == null)
+        {
+            clearArea = FindFirstObjectByType<ClearArea>();
+        }
+        if(clearArea == null)
+        {
+            Debug.LogError("ClearArea is not found");
+        }
+        else
+        {
+            clearArea.OnBecameVisibleEvent += OnClearAreaVisible;
+            clearArea.OnBecameInvisibleEvent += OnClearAreaInvisible;
+        }
     }
 
     private void Start()

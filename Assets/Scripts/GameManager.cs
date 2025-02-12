@@ -1,51 +1,33 @@
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using UnityEngine;
 using UnityEngine.UIElements;
 using UnityEngine.UI;
 
-public class GameManager : MonoBehaviour
+public class GameManager : SingletonBehaviour<GameManager>
 {
-
-    static GameManager s_inst;
-    public static GameManager Inst
+    
+    
+    public enum GameState
     {
-        get
-        {
-            if (s_inst == null)
-            {
-                s_inst = new GameManager();
-            }
-            return s_inst;
-        }
+         None,
+         Main,
+         Dialog,
+         Running,
+         Dead
     }
 
     
-    SoundManager _sound = new SoundManager();
-    
+    public static SoundManager Sound => SoundManager.Instance;
 
-    public static SoundManager Sound { get { return Inst._sound; } }
+    public GameState State = GameState.None;
  
     private void Awake()
     {
-        Init();
+        
     }
-    static void Init()
-    {
-        if (s_inst == null)
-        {
-            GameObject go = GameObject.Find("@GameManager");
-            if (go == null)
-            {
-                go = new GameObject { name = "@GameManager" };
-                go.AddComponent<GameManager>();
-            }
 
-            DontDestroyOnLoad(go);
-            s_inst = go.GetComponent<GameManager>();
-
-        }
-    }
 
     private void Update()
     {

@@ -45,6 +45,8 @@ public class RocketController : MonoBehaviour
     private int lastBoostId = -1;
     private void OnTouching(int id, Vector2 pos)
     {
+        if(GameManager.Instance.State != GameManager.GameState.Running)
+            return;
         if(rocket.State == Rocket.RocketState.Attached)
         {
             rocket.Detach();
@@ -58,6 +60,8 @@ public class RocketController : MonoBehaviour
     
     private void OnTouchUp(int id, Vector2 pos)
     {
+        if(GameManager.Instance.State != GameManager.GameState.Running)
+            return;
         if (rocket.IsBoosting)
         {
             // if (lastBoostId == id)
@@ -67,12 +71,15 @@ public class RocketController : MonoBehaviour
     
     private void OnDragging(int id, Vector2 pos, Vector2 endPos)
     {
-        
+        if(GameManager.Instance.State != GameManager.GameState.Running)
+            return;
     }
     
 
     private void OnDragEnd(int id, Vector2 pos, Vector2 endPos)
     {
+        if(GameManager.Instance.State != GameManager.GameState.Running)
+            return;
         if(rocket.State == Rocket.RocketState.Attached)
         {
             rocket.Detach();

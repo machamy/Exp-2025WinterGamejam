@@ -338,8 +338,10 @@ public class Rocket : MonoBehaviour
             spriteRenderer.color = Color.Lerp(originalColor, heatColor, t);
             alertEventChannel.RaiseUpdateAlert(heatTime, currentHeat);
             if(!IsOnHeat)
-                break;
+                yield break;
         }
+        if(!IsOnHeat)
+            yield break;
         alertEventChannel.RaiseEndAlert(currentHeat);
         Die();
     }
