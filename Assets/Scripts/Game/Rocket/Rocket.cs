@@ -41,7 +41,6 @@ public class Rocket : MonoBehaviour
     public float RemainingHeatTime => heatTime - currentHeat;
     public bool IsAbsAttached => state == RocketState.Attached || state == RocketState.BreakingAttached;
     [Header("Passenger")]
-    [SerializeField] private bool hasPassenger = false;
     [SerializeField] private List<int> passengers = new List<int>();
     [SerializeField] private float[] sizeArr = new []{1f,1.3f,1.69f,2.2f,2.86f};
     [SerializeField] private float[] fuelArr = new []{25f,20f,15f,10f,5f};
@@ -194,12 +193,18 @@ public class Rocket : MonoBehaviour
         UpdatePassengerState();
     }
     
+    public List<int> GetPassenger()
+    {
+        return new List<int>(passengers);
+    }
+    
     public void ClearPassenger()
     {
         passengers.Clear();
         UpdatePassengerState();
     }
     
+    [ContextMenu("Update Passenger State")]
     public void UpdatePassengerState()
     {
         maxFuel = fuelArr[passengers.Count];
