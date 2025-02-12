@@ -9,6 +9,7 @@ public class Rocket : MonoBehaviour
     private Rigidbody2D rbody;
 
     [Header("Rocket Settings")]
+    [SerializeField] private bool useAngularVelocity = false;
     [SerializeField] private bool updateSpeedOnTick = true;
     [SerializeField] private float speed = 5f;
     [SerializeField] private float boostSpeed = 10f;
@@ -102,6 +103,8 @@ public class Rocket : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if(!useAngularVelocity)
+            rbody.angularVelocity = 0;
         if (updateSpeedOnTick)
             UpdateSpeed();
         if (State == RocketState.Boosting)
