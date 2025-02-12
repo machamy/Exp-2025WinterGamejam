@@ -64,7 +64,7 @@ public class Stage1ClosingTextPopup : MonoBehaviour
 
         
         // 메인 시나리오 코루틴 시작
-        StartCoroutine(ClosingTextStage1());
+        StartCoroutine(ClosingText());
 
     }
     public void OnClear()
@@ -197,14 +197,14 @@ public class Stage1ClosingTextPopup : MonoBehaviour
         // 여기서는 버튼 GameObject를 끄지 않음
         // 실제 비활성화는 CloseClosingText() 시점에 이루어짐
     }
-    IEnumerator ClosingTextStage1() //("등장인물", "대사")로 입력
+    IEnumerator ClosingText() //("등장인물", "대사")로 입력
     {
-        yield return StartCoroutine(NormalChat("Character1", "Gamejam"));
-        yield return StartCoroutine(NormalChat("Character2", "Exp"));
-        yield return StartCoroutine(NormalChat("Character3", "Rocket"));
-        yield return StartCoroutine(NormalChat("Character7", "Hello world"));
-        yield return StartCoroutine(NormalChat("Character8", "Hello?"));
-        
+        yield return StartCoroutine(NormalChat("점슬이", "엥~~ 어째서 이제야 온거야?"));
+        yield return StartCoroutine(NormalChat("점슬이", "뭐~ 구조신호를 보낸건 나, 점슬이야♡"));
+        yield return StartCoroutine(NormalChat("점슬이", "그딴거도 우주선이냐구요~ㅋ"));
+        yield return StartCoroutine(NormalChat("점슬이", "허~접♡"));
+        yield return StartCoroutine(NormalChat("점슬이", "이대로 있다간 우리 행성이 무너질수도 있다는데~"));
+        yield return StartCoroutine(NormalChat("점슬이", "점슬이는 오빠 우주선으로 가야하나~?\r\n"));
         yield return StartCoroutine(NormalChat("", "Select"));
         SelectButton1.gameObject.SetActive(true);
         SelectButton2.gameObject.SetActive(true);
@@ -213,19 +213,17 @@ public class Stage1ClosingTextPopup : MonoBehaviour
     IEnumerator TextSelect1() //("등장인물", "대사")로 입력
     {
         
-        yield return StartCoroutine(NormalChat("GameJam", "Weak [girl]"));
-        yield return StartCoroutine(NormalChat("GameJam", "Hello"));
-        yield return StartCoroutine(NormalChat("GameJam", "Bye"));
-        yield return StartCoroutine(NormalChat("", "WelcomeEnding"));
+        yield return StartCoroutine(NormalChat("점슬이", "흥~♡ 내가 원해서 따라가는게 아니라구!"));
+       
+        yield return StartCoroutine(NormalChat("", "점슬이는 당신에게 엎혀 우주선에 올라탔습니다."));
         CloseClosingText();
     }
     IEnumerator TextSelect2() //("등장인물", "대사")로 입력
     {
         
-        yield return StartCoroutine(NormalChat("Jam", "Hello?"));
-        yield return StartCoroutine(NormalChat("jam", "Dont leave me"));
-        yield return StartCoroutine(NormalChat("Jam", "ByeBye"));
-        yield return StartCoroutine(NormalChat("", "ByeEnding"));
+        yield return StartCoroutine(NormalChat("점슬이", "이 바보! 무쓸모! 멍청이! 쓰레기! 죽어!"));
+
+        yield return StartCoroutine(NormalChat("", "점슬이는 토라진 얼굴로 당신을 지나쳐 뛰쳐나갑니다."));
         CloseClosingText();
     }
 
