@@ -1,5 +1,7 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -17,11 +19,17 @@ public class Rocket : MonoBehaviour
     [SerializeField] private float boostSpeed = 10f;
     [SerializeField] private float maxFuel = 100f;
     [SerializeField] private float boostCost =  1f;
+    [SerializeField] private float rotateCost = 1f;
     [Header("Rocket State")]
     [SerializeField] private float fuel = 100f;
     [SerializeField] private RocketState state = RocketState.None;
     [SerializeField] private bool isBoosting = false;
-    
+    [Header("Passenger")]
+    [SerializeField] private bool hasPassenger = false;
+    [SerializeField] private List<int> passengers = new List<int>();
+    [SerializeField] private float[] sizeArr = new []{1f,1.3f,1.69f,2.2f,2.86f};
+    [SerializeField] private float[] fuelArr = new []{25f,20f,15f,10f,5f};
+    public int PassengerCount => passengers.Count;
     public bool IsAbsAttached => state == RocketState.Attached || state == RocketState.BreakingAttached;
     
     public float Fuel => fuel;
@@ -77,6 +85,7 @@ public class Rocket : MonoBehaviour
     public Vector2 BoostVelocity => up * boostSpeed;
     private void Start()
     {
+        UpdatePassengerState();
         Launch();
     }
 
@@ -114,6 +123,17 @@ public class Rocket : MonoBehaviour
             default:
                 break;
         }
+    }
+
+    public void AddPassenger(int id)
+    {
+        passengers.Add(id);
+        UpdatePassengerState();
+    }
+    public void UpdatePassengerState()
+    {
+        maxFuel = fuelArr[passengers.Count];
+        transform.localScale = Vector3.one * sizeArr[passengers.Count];
     }
 
     private void FixedUpdate()
@@ -175,6 +195,7 @@ public class Rocket : MonoBehaviour
          // print(rot);
         rbody.SetRotation(rot);
         // print(rot);
+        fuel -= rotateCost;
         UpdateSpeed();
     }
 
@@ -212,6 +233,8 @@ public class Rocket : MonoBehaviour
     }
     public void Die()
     {
-        
+        State = RocketState.Dead;
+        Debug.Log("Rocket Died");
+        gameObject.SetActive(false);
     }
 }

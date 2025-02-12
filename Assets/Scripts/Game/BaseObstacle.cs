@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class BaseObstacle : MonoBehaviour
 {
     public enum ObstacleType
@@ -18,7 +20,11 @@ public class BaseObstacle : MonoBehaviour
     public float BreakTime => breakTime;
     public ObstacleType Type => obstacleType;
 
-    
+    private void Reset()
+    {
+        GetComponent<Rigidbody2D>().gravityScale = 0;
+    }
+
     public void OnRocketCollision(Rocket rocket,bool isHead)
     {
         switch (obstacleType)
