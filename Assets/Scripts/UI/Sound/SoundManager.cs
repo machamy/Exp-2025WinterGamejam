@@ -1,35 +1,36 @@
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SoundManager : MonoBehaviour
+public class SoundManager : SingletonBehaviour<SoundManager>
 {
-    private static SoundManager instance = null;
-    public static SoundManager Instance
-    {
-        get
-        {
-            if (instance == null)
-            {
-                return null;
-            }
-            return instance;
-        }
-    }
-    private void Awake()
-    {
-        if (instance == null)
-        {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
-        }
-        else
-        {
-            Destroy(this.gameObject);
-        }
-    }
+    // private static SoundManager instance = null;
+    // public static SoundManager Instance
+    // {
+    //     get
+    //     {
+    //         if (instance == null)
+    //         {
+    //             return null;
+    //         }
+    //         return instance;
+    //     }
+    // }
+    // private void Awake()
+    // {
+    //     if (instance == null)
+    //     {
+    //         instance = this;
+    //         DontDestroyOnLoad(this.gameObject);
+    //     }
+    //     else
+    //     {
+    //         Destroy(this.gameObject);
+    //     }
+    // }
 
     AudioClip bgmMain; // 메인 오디오클립
     AudioClip bgmStage; // 스테이지 오디오클립
