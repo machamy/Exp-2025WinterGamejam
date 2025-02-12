@@ -20,19 +20,31 @@ public class Rocket : MonoBehaviour
     [SerializeField] private float maxFuel = 100f;
     [SerializeField] private float boostCost =  1f;
     [SerializeField] private float rotateCost = 1f;
+    
+    
     [Header("Rocket State")]
     [SerializeField] private float fuel = 100f;
+    [SerializeField] private bool isOnHeat = false;
+    [SerializeField] private float currentHeat = 0f;
+    [SerializeField] private float heatTime = 2f;
     [SerializeField] private RocketState state = RocketState.None;
     [SerializeField] private bool isBoosting = false;
+    
+    
+    public float Fuel => fuel;
+    public bool IsOnHeat => isOnHeat;
+    public float CurrentHeat => currentHeat;
+    public float RemainingHeatTime => heatTime - currentHeat;
+    public bool IsAbsAttached => state == RocketState.Attached || state == RocketState.BreakingAttached;
     [Header("Passenger")]
     [SerializeField] private bool hasPassenger = false;
     [SerializeField] private List<int> passengers = new List<int>();
     [SerializeField] private float[] sizeArr = new []{1f,1.3f,1.69f,2.2f,2.86f};
     [SerializeField] private float[] fuelArr = new []{25f,20f,15f,10f,5f};
     public int PassengerCount => passengers.Count;
-    public bool IsAbsAttached => state == RocketState.Attached || state == RocketState.BreakingAttached;
     
-    public float Fuel => fuel;
+    
+   
     public RocketState State
     {
         get => state;
@@ -197,6 +209,34 @@ public class Rocket : MonoBehaviour
         // print(rot);
         fuel -= rotateCost;
         UpdateSpeed();
+    }
+    
+    public void HeatAreaEnter()
+    {
+        isOnHeat = true;
+        StartCoroutine(HeatRoutine());
+        
+        // TODO : UI 나오게
+    }
+    
+    private IEnumerator HeatRoutine()
+    {
+        if(!isOnHeat) 
+            yield break;
+        while (currentHeat < heatTime)
+        {
+            yield return new WaitForFixedUpdate();
+            currentHeat += Time.fixedDeltaTime;
+            if(!isOnHeat)
+                break;
+        }
+        Die();
+    }
+    
+    public void HeatAreaExit()
+    {
+        isOnHeat = false;
+        currentHeat = 0;
     }
 
     
