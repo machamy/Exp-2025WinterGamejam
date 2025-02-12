@@ -3,8 +3,11 @@ using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.Splines;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class SplineObject : MonoBehaviour
 {
+    private Rigidbody2D rbody;
+    
     [SerializeField] private SplineContainer splineContainer;
     private Spline spline;
     [Header("revolution Settings")]
@@ -24,7 +27,8 @@ public class SplineObject : MonoBehaviour
     private void Awake()
     {
         spline = splineContainer.Spline;
-        lastPosition = transform.position;
+        rbody = GetComponent<Rigidbody2D>();
+        lastPosition = rbody.position;
     }
 
     public void FixedUpdate()
@@ -38,7 +42,7 @@ public class SplineObject : MonoBehaviour
     // 공전
     private void Revolution()
     {
-        velocity = (Vector2)transform.position - lastPosition;
+        velocity = rbody.position - lastPosition;
         Vector3 targetPosition;
         if (moveByRatio)
         {
@@ -52,11 +56,15 @@ public class SplineObject : MonoBehaviour
         }
         if(useSplinePosition)
         {
-            transform.position = splineContainer.transform.TransformPoint(targetPosition);
+            rbody.MovePosition(splineContainer.transform.TransformPoint(targetPosition));
             // print($"spline : {splineContainer.transform.position}");
             // print($"target : {targetPosition}");
             // print($"transform : {splineContainer.transform.TransformPoint(targetPosition)}");
             // print($"other : {splineContainer.transform.position + targetPosition}");
+        }
+        else
+        {
+            rbody.MovePosition(targetPosition);
         }
         if(!isReversed && tRevolution>=1f)
         {
@@ -85,14 +93,17 @@ public class SplineObject : MonoBehaviour
     // 회전
     private void Rotate()
     {
-        transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z + rotationSpeed * Time.fixedDeltaTime);
+        //transform.eulerAngles = new Vector3(0, 0, transform.eulerAngles.z + rotationSpeed * Time.fixedDeltaTime);
+        rbody.MoveRotation(rbody.rotation + rotationSpeed * Time.fixedDeltaTime);
     }
 
     private void OnValidate()
     {
         if (useSplinePosition)
         {
-            transform.position = splineContainer.transform.position;
+            if(splineContainer != null)
+                if(splineContainer.transform != null)
+                    transform.position = splineContainer.transform.position;
         }
     }
 }

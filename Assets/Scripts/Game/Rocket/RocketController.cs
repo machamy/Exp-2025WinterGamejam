@@ -45,6 +45,10 @@ public class RocketController : MonoBehaviour
     private int lastBoostId = -1;
     private void OnTouching(int id, Vector2 pos)
     {
+        if(rocket.State == Rocket.RocketState.Attached)
+        {
+            rocket.Detach();
+        }
         if (rocket.State == Rocket.RocketState.Normal)
         {
             lastBoostId = id;
@@ -54,7 +58,7 @@ public class RocketController : MonoBehaviour
     
     private void OnTouchUp(int id, Vector2 pos)
     {
-        if (rocket.State == Rocket.RocketState.Boosting)
+        if (rocket.IsBoosting)
         {
             // if (lastBoostId == id)
             rocket.EndBoost();
@@ -69,6 +73,10 @@ public class RocketController : MonoBehaviour
 
     private void OnDragEnd(int id, Vector2 pos, Vector2 endPos)
     {
+        if(rocket.State == Rocket.RocketState.Attached)
+        {
+            rocket.Detach();
+        }
         Vector2 direction = endPos - pos;
         rocket.PointDirection(direction);
     }

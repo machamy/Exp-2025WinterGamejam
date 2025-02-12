@@ -1,12 +1,14 @@
 using System;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-[RequireComponent(typeof(Rigidbody2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(FixedJoint2D))]
 public class Rocket : MonoBehaviour
 {
 
     private Rigidbody2D rbody;
+    private FixedJoint2D joint;
 
     [Header("Rocket Settings")]
     [SerializeField] private bool useAngularVelocity = false;
@@ -18,7 +20,9 @@ public class Rocket : MonoBehaviour
     [Header("Rocket State")]
     [SerializeField] private float fuel = 100f;
     [SerializeField] private RocketState state = RocketState.None;
+    [SerializeField] private bool isBoosting = false;
     
+    public bool IsAbsAttached => state == RocketState.Attached || state == RocketState.BreakingAttached;
     
     public float Fuel => fuel;
     public RocketState State
@@ -30,18 +34,29 @@ public class Rocket : MonoBehaviour
             UpdateSpeed();
         }
     }
+    
+    public bool IsBoosting
+    {
+        get => isBoosting;
+        set
+        {
+            isBoosting = value;
+            UpdateSpeed();
+        }
+    }
     public enum RocketState
     {
         None,
         Normal,
-        Boosting,
         Attached,
+        BreakingAttached,
         Dead
     }
     
     private void Awake()
     {
         rbody = GetComponent<Rigidbody2D>();
+        joint = GetComponent<FixedJoint2D>();
         rbody.gravityScale = 0;
         fuel = maxFuel;
     }
@@ -73,12 +88,12 @@ public class Rocket : MonoBehaviour
     public void StartBoost()
     {
         if(fuel <= 0) return;
-        State = RocketState.Boosting;
+        IsBoosting = true;
     }
     
     public void EndBoost()
     {
-        State = RocketState.Normal;
+        IsBoosting = false;
     }
 
     public void UpdateSpeed()
@@ -86,10 +101,10 @@ public class Rocket : MonoBehaviour
         switch (state)
         {
             case RocketState.Normal:
-                rbody.linearVelocity = NormalVelocity;
-                break;
-            case RocketState.Boosting:
-                rbody.linearVelocity = BoostVelocity;
+                if (isBoosting)
+                    rbody.linearVelocity = BoostVelocity;
+                else
+                    rbody.linearVelocity = NormalVelocity;
                 break;
             case RocketState.Attached:
                 break;
@@ -107,7 +122,7 @@ public class Rocket : MonoBehaviour
             rbody.angularVelocity = 0;
         if (updateSpeedOnTick)
             UpdateSpeed();
-        if (State == RocketState.Boosting)
+        if (IsBoosting && State!=RocketState.Dead)
         {
             fuel -= boostCost * Time.fixedDeltaTime;
             if (fuel <= 0)
@@ -121,7 +136,10 @@ public class Rocket : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        
+        if(other.gameObject.TryGetComponent<BaseObstacle>(out var obstacle))
+        {
+            obstacle.OnRocketCollision(this,other.otherCollider.CompareTag("PlayerHead"));
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -160,6 +178,38 @@ public class Rocket : MonoBehaviour
         UpdateSpeed();
     }
 
+    
+    public void Attach(BaseObstacle parent)
+    {
+        joint.enabled = true;
+        joint.connectedBody = parent.GetComponent<Rigidbody2D>();
+        State = RocketState.Attached;
+    }
+    
+    public void AttachForBreak(BaseObstacle parent)
+    {
+        joint.enabled = true;
+        joint.connectedBody = parent.GetComponent<Rigidbody2D>();
+        State = RocketState.BreakingAttached;
+        StartCoroutine(BreakRoutine(parent));
+    }
+    private IEnumerator BreakRoutine(BaseObstacle obstacle)
+    {
+        float remainTime = obstacle.BreakTime;
+        while(remainTime>0)
+        {
+            yield return new WaitForFixedUpdate();
+            remainTime -= Time.fixedDeltaTime;
+        }
+        obstacle.Break();
+        Detach();
+    }
+    public void Detach(RocketState state = RocketState.Normal)
+    {
+        joint.connectedBody = null;
+        joint.enabled = false;
+        State = state;
+    }
     public void Die()
     {
         
