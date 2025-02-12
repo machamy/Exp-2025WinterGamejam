@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using DefaultNamespace.Game;
 using NUnit.Framework;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -20,7 +21,8 @@ public class Rocket : MonoBehaviour
     [SerializeField] private float maxFuel = 100f;
     [SerializeField] private float boostCost =  1f;
     [SerializeField] private float rotateCost = 1f;
-    
+    [SerializeField] private bool applayGravityArea = true;
+    [SerializeField] private float gravityRotationSpeed = 1f;
     
     [Header("Rocket State")]
     [SerializeField] private float fuel = 100f;
@@ -30,7 +32,7 @@ public class Rocket : MonoBehaviour
     [SerializeField] private RocketState state = RocketState.None;
     [SerializeField] private bool isBoosting = false;
     
-    
+    private HashSet<GravityArea> gravityAreas = new HashSet<GravityArea>();
     public float Fuel => fuel;
     public bool IsOnHeat => isOnHeat;
     public float CurrentHeat => currentHeat;
@@ -79,6 +81,8 @@ public class Rocket : MonoBehaviour
         joint = GetComponent<FixedJoint2D>();
         rbody.gravityScale = 0;
         fuel = maxFuel;
+
+        rbody.centerOfMass = Vector2.up;
     }
    
 
@@ -119,29 +123,77 @@ public class Rocket : MonoBehaviour
 
     public void UpdateSpeed()
     {
+        Vector2 vel;
         switch (state)
-        {
+        {   
+            case RocketState.None:
+                return;
             case RocketState.Normal:
                 if (isBoosting)
-                    rbody.linearVelocity = BoostVelocity;
+                    vel = BoostVelocity;
                 else
-                    rbody.linearVelocity = NormalVelocity;
+                    vel = NormalVelocity;
                 break;
             case RocketState.Attached:
-                break;
+            case RocketState.BreakingAttached:
+                return;
             case RocketState.Dead:
-                rbody.linearVelocity = Vector2.zero;
+                vel = Vector2.zero;
                 break;
             default:
+                return;
                 break;
         }
+
+        if (applayGravityArea)
+        {
+            Vector2 gravity = Vector2.zero;
+            foreach (var area in gravityAreas)
+            {
+                gravity += area.GetAcceleration(rbody.position) * Time.fixedDeltaTime;
+            }
+            vel += gravity;
+
+            if (gravity != Vector2.zero)
+            {
+                PointDirectionSmooth(vel, gravityRotationSpeed, false);
+            }
+        }
+        rbody.linearVelocity = vel;
     }
 
+    #if UNITY_EDITOR
+    
+    [ContextMenu("Add Test Passenger")]
+    public void AddTestPassenger()
+    {
+        AddPassenger(0);
+    }
+    [ContextMenu("Remove Test Passenger")]
+    public void RemoveTestPassenger()
+    {
+        passengers.RemoveAt(passengers.Count-1);
+        UpdatePassengerState();
+    }
+    #endif
     public void AddPassenger(int id)
     {
         passengers.Add(id);
         UpdatePassengerState();
     }
+    
+    public void PopPassenger()
+    {
+        passengers.RemoveAt(passengers.Count-1);
+        UpdatePassengerState();
+    }
+    
+    public void ClearPassenger()
+    {
+        passengers.Clear();
+        UpdatePassengerState();
+    }
+    
     public void UpdatePassengerState()
     {
         maxFuel = fuelArr[passengers.Count];
@@ -195,12 +247,12 @@ public class Rocket : MonoBehaviour
         
     }
 
-    public void PointTo(Vector2 target)
+    public void PointTo(Vector2 target,bool updateSpeed = true)
     {
-        PointDirection(target - (Vector2)transform.position);
+        PointDirection(target - (Vector2)transform.position,updateSpeed);
     }
     
-    public void PointDirection(Vector2 dir)
+    public void PointDirection(Vector2 dir,bool updateSpeed = true)
     {
         // transform.up = dir.normalized;
         var rot = Quaternion.LookRotation(Vector3.forward, dir).eulerAngles.z;
@@ -208,7 +260,19 @@ public class Rocket : MonoBehaviour
         rbody.SetRotation(rot);
         // print(rot);
         fuel -= rotateCost;
-        UpdateSpeed();
+        if(updateSpeed)
+            UpdateSpeed();
+    }
+
+    public void PointDirectionSmooth(Vector2 dir, float smoothness,bool updateSpeed = true)
+    {
+        var targetRot = Quaternion.LookRotation(Vector3.forward, dir).eulerAngles.z;
+        var currentRot = rbody.rotation;
+        var newRot = Mathf.LerpAngle(currentRot, targetRot, smoothness * Time.fixedDeltaTime);
+        rbody.SetRotation(newRot);
+        fuel -= rotateCost;
+        if(updateSpeed)
+         UpdateSpeed();
     }
     
     public void HeatAreaEnter()
@@ -239,6 +303,20 @@ public class Rocket : MonoBehaviour
         currentHeat = 0;
     }
 
+    
+    public void AddGravityArea(GravityArea area)
+    {
+        if(gravityAreas.Contains(area))
+            return;
+        gravityAreas.Add(area);
+    }
+    
+    public void RemoveGravityArea(GravityArea area)
+    {
+        if(!gravityAreas.Contains(area))
+            return;
+        gravityAreas.Remove(area);
+    }
     
     public void Attach(BaseObstacle parent)
     {
