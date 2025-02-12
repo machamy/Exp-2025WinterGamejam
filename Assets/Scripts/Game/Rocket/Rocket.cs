@@ -47,7 +47,9 @@ public class Rocket : MonoBehaviour
     [SerializeField] private float[] fuelArr = new []{25f,20f,15f,10f,5f};
     public int PassengerCount => passengers.Count;
     
-    
+    private Vector2 previousPosition;
+    private Vector2 deltaPosition;
+    public Vector2 DeltaPosition => deltaPosition;
    
     public RocketState State
     {
@@ -84,7 +86,8 @@ public class Rocket : MonoBehaviour
         joint = GetComponent<FixedJoint2D>();
         rbody.gravityScale = 0;
         fuel = maxFuel;
-
+        previousPosition = transform.position;
+        deltaPosition = Vector2.zero;
         rbody.centerOfMass = Vector2.up;
     }
    
@@ -205,6 +208,9 @@ public class Rocket : MonoBehaviour
 
     private void FixedUpdate()
     {
+        var position = rbody.position;
+        deltaPosition = (Vector2)position - previousPosition;
+        previousPosition = position;
         if(!useAngularVelocity)
             rbody.angularVelocity = 0;
         if (updateSpeedOnTick)
