@@ -1169,18 +1169,12 @@ MonoBehaviour:
   CharacterName: {fileID: 50786980}
   ClosingTextPanel: {fileID: 0}
   NextButton: {fileID: 0}
-  SkipButton: {fileID: 0}
   SelectButton1: {fileID: 241326959}
   SelectButton2: {fileID: 1860313089}
   Player: {fileID: 0}
   Fuel: {fileID: 0}
   CharacterPose1: {fileID: 0}
   CharacterPose2: {fileID: 0}
-  CharacterPose3: {fileID: 0}
-  CharacterPose4: {fileID: 0}
-  CharacterPose5: {fileID: 0}
-  CharacterPose6: {fileID: 0}
-  CharacterPose7: {fileID: 0}
   writerText: 
   typingSpeed: 0.02
   isSkipping: 0
@@ -1442,18 +1436,12 @@ MonoBehaviour:
   CharacterName: {fileID: 50786980}
   ClosingTextPanel: {fileID: 1780410049}
   NextButton: {fileID: 1582688492}
-  SkipButton: {fileID: 0}
   SelectButton1: {fileID: 241326959}
   SelectButton2: {fileID: 1860313089}
   Player: {fileID: 0}
   Fuel: {fileID: 0}
   CharacterPose1: {fileID: 0}
   CharacterPose2: {fileID: 0}
-  CharacterPose3: {fileID: 0}
-  CharacterPose4: {fileID: 0}
-  CharacterPose5: {fileID: 0}
-  CharacterPose6: {fileID: 0}
-  CharacterPose7: {fileID: 0}
   writerText: 
   typingSpeed: 0.02
   isSkipping: 0
@@ -5520,16 +5508,10 @@ MonoBehaviour:
   CharacterName: {fileID: 1107951763}
   OpeningTextPanel: {fileID: 1701433691}
   NextButton: {fileID: 935198190}
-  SkipButton: {fileID: 0}
   Player: {fileID: 0}
   Fuel: {fileID: 0}
   CharacterPose1: {fileID: 0}
   CharacterPose2: {fileID: 0}
-  CharacterPose3: {fileID: 0}
-  CharacterPose4: {fileID: 0}
-  CharacterPose5: {fileID: 0}
-  CharacterPose6: {fileID: 0}
-  CharacterPose7: {fileID: 0}
   writerText: 
   typingSpeed: 0.02
   isSkipping: 0
@@ -5884,18 +5866,12 @@ MonoBehaviour:
   CharacterName: {fileID: 50786980}
   ClosingTextPanel: {fileID: 1780410049}
   NextButton: {fileID: 1582688492}
-  SkipButton: {fileID: 0}
   SelectButton1: {fileID: 241326959}
   SelectButton2: {fileID: 1860313089}
   Player: {fileID: 0}
   Fuel: {fileID: 0}
   CharacterPose1: {fileID: 0}
   CharacterPose2: {fileID: 0}
-  CharacterPose3: {fileID: 0}
-  CharacterPose4: {fileID: 0}
-  CharacterPose5: {fileID: 0}
-  CharacterPose6: {fileID: 0}
-  CharacterPose7: {fileID: 0}
   writerText: 
   typingSpeed: 0.02
   isSkipping: 0
@@ -6138,18 +6114,12 @@ MonoBehaviour:
   CharacterName: {fileID: 50786980}
   ClosingTextPanel: {fileID: 0}
   NextButton: {fileID: 0}
-  SkipButton: {fileID: 0}
   SelectButton1: {fileID: 241326959}
   SelectButton2: {fileID: 1860313089}
   Player: {fileID: 0}
   Fuel: {fileID: 0}
   CharacterPose1: {fileID: 0}
   CharacterPose2: {fileID: 0}
-  CharacterPose3: {fileID: 0}
-  CharacterPose4: {fileID: 0}
-  CharacterPose5: {fileID: 0}
-  CharacterPose6: {fileID: 0}
-  CharacterPose7: {fileID: 0}
   writerText: 
   typingSpeed: 0.02
   isSkipping: 0
