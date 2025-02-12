@@ -20,13 +20,12 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
+    
     SoundManager _sound = new SoundManager();
     
+
     public static SoundManager Sound { get { return Inst._sound; } }
-
-
-
+ 
     private void Awake()
     {
         Init();
@@ -50,6 +49,6 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        
+
     }
 }

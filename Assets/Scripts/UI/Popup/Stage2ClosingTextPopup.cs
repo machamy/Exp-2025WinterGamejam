@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using TMPro.Examples;
 
 public class Stage2ClosingTextPopup : MonoBehaviour
 {
@@ -13,23 +14,19 @@ public class Stage2ClosingTextPopup : MonoBehaviour
     public GameObject ClosingTextPanel;  // 클로징 스크립트 패널
     
     public Button NextButton;
-    public Button SkipButton;
     public Button SelectButton1;
     public Button SelectButton2;
 
     [Header("플레이어 오브젝트")]
     [SerializeField] private GameObject Player;
     [SerializeField] private GameObject Fuel;
-    
+
+    public static bool istakenStage2 = false;
 
     [Header("클로징 스크립트 캐릭터 스프라이트")]
     public GameObject CharacterPose1; 
     public GameObject CharacterPose2;
-    public GameObject CharacterPose3; 
-    public GameObject CharacterPose4;
-    public GameObject CharacterPose5; 
-    public GameObject CharacterPose6; 
-    public GameObject CharacterPose7;
+
 
     private bool isFullTextDisplayed = false;
     private bool isNextButtonClicked = false;
@@ -92,7 +89,7 @@ public class Stage2ClosingTextPopup : MonoBehaviour
         StartCoroutine(FadeOutBranchButton(SelectButton1, 1f));
         // 다른 버튼도 함께 서서히 투명화
         StartCoroutine(FadeOutBranchButton(SelectButton2, 1f));
-
+        
         // 선택지 1에 대한 분기 시나리오 코루틴 시작
         StartCoroutine(TextSelect1());
     }
@@ -231,11 +228,11 @@ public class Stage2ClosingTextPopup : MonoBehaviour
         ClosingTextPanel.SetActive(false); // 패널 비활성화
         isFirstTime1 = false;
         Time.timeScale = 1f;
-        
+        SceneManager.LoadScene("Stage3");
         //Player.SetActive(true);
-        
+
         //Fuel.SetActive(true);
-        
+
     }
 }
 

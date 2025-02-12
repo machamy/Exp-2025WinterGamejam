@@ -13,9 +13,7 @@ public class Stage1OpeningTextPopup : MonoBehaviour
     public GameObject OpeningTextPanel;  // 오프닝 스크립트 패널
     
     public Button NextButton;
-    public Button SkipButton;
-    
-
+   
     [Header("플레이어 오브젝트")]
     [SerializeField] private GameObject Player;
     [SerializeField] private GameObject Fuel;
@@ -24,11 +22,7 @@ public class Stage1OpeningTextPopup : MonoBehaviour
     [Header("오프닝 스크립트 캐릭터 스프라이트")]
     public GameObject CharacterPose1; 
     public GameObject CharacterPose2;
-    public GameObject CharacterPose3; 
-    public GameObject CharacterPose4;
-    public GameObject CharacterPose5; 
-    public GameObject CharacterPose6; 
-    public GameObject CharacterPose7;
+   
 
     private bool isFullTextDisplayed = false;
     private bool isNextButtonClicked = false;
