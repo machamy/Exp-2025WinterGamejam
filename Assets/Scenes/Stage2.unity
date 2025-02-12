@@ -1939,7 +1939,7 @@ GameObject:
   - component: {fileID: 790292536}
   - component: {fileID: 790292535}
   - component: {fileID: 790292534}
-  - component: {fileID: 790292533}
+  - component: {fileID: 790292537}
   m_Layer: 5
   m_Name: Clear
   m_TagString: Untagged
@@ -1967,37 +1967,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 400, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &790292533
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 790292531}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b4c4d9e678d215419da3907f92dd585, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ChatText: {fileID: 140654104}
-  CharacterName: {fileID: 1836111577}
-  ClosingTextPanel: {fileID: 141937463}
-  NextButton: {fileID: 824129767}
-  SkipButton: {fileID: 0}
-  SelectButton1: {fileID: 1944645700}
-  SelectButton2: {fileID: 812485581}
-  Player: {fileID: 0}
-  Fuel: {fileID: 0}
-  CharacterPose1: {fileID: 0}
-  CharacterPose2: {fileID: 0}
-  CharacterPose3: {fileID: 0}
-  CharacterPose4: {fileID: 0}
-  CharacterPose5: {fileID: 0}
-  CharacterPose6: {fileID: 0}
-  CharacterPose7: {fileID: 0}
-  writerText: 
-  typingSpeed: 0.02
-  isSkipping: 0
 --- !u!114 &790292534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2042,8 +2011,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 790292533}
-        m_TargetAssemblyTypeName: Stage1ClosingTextPopup, Assembly-CSharp
+      - m_Target: {fileID: 790292537}
+        m_TargetAssemblyTypeName: Stage2ClosingTextPopup, Assembly-CSharp
         m_MethodName: OnClear
         m_Mode: 1
         m_Arguments:
@@ -2092,6 +2061,37 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 790292531}
   m_CullTransparentMesh: 1
+--- !u!114 &790292537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 790292531}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e6a0e939adef4ab4c91a416cb7be9534, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ChatText: {fileID: 140654104}
+  CharacterName: {fileID: 1836111577}
+  ClosingTextPanel: {fileID: 141937463}
+  NextButton: {fileID: 824129767}
+  SkipButton: {fileID: 0}
+  SelectButton1: {fileID: 1944645700}
+  SelectButton2: {fileID: 812485581}
+  Player: {fileID: 0}
+  Fuel: {fileID: 0}
+  CharacterPose1: {fileID: 0}
+  CharacterPose2: {fileID: 0}
+  CharacterPose3: {fileID: 0}
+  CharacterPose4: {fileID: 0}
+  CharacterPose5: {fileID: 0}
+  CharacterPose6: {fileID: 0}
+  CharacterPose7: {fileID: 0}
+  writerText: 
+  typingSpeed: 0.02
+  isSkipping: 0
 --- !u!1 &812485578
 GameObject:
   m_ObjectHideFlags: 0
@@ -2145,7 +2145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ChatText: {fileID: 140654104}
   CharacterName: {fileID: 1836111577}
-  ClosingTextPanel: {fileID: 0}
+  ClosingTextPanel: {fileID: 141937463}
   NextButton: {fileID: 824129767}
   SkipButton: {fileID: 0}
   SelectButton1: {fileID: 1944645700}
@@ -3680,7 +3680,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: a35e4ea7f65495f469c96511ea1a88f7, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 1fd443bad6c0c3f4e8f5fcce76147b21, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -5526,13 +5526,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e6a0e939adef4ab4c91a416cb7be9534, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ChatText: {fileID: 0}
-  CharacterName: {fileID: 0}
+  ChatText: {fileID: 140654104}
+  CharacterName: {fileID: 1836111577}
   ClosingTextPanel: {fileID: 141937463}
-  NextButton: {fileID: 0}
+  NextButton: {fileID: 824129767}
   SkipButton: {fileID: 0}
   SelectButton1: {fileID: 1944645700}
-  SelectButton2: {fileID: 0}
+  SelectButton2: {fileID: 812485581}
   Player: {fileID: 0}
   Fuel: {fileID: 0}
   CharacterPose1: {fileID: 0}

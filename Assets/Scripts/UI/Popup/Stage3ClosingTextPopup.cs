@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 
-public class Stage2ClosingTextPopup : MonoBehaviour
+public class Stage3ClosingTextPopup : MonoBehaviour
 {
     [Header("참조 요소들")]
     public TMP_Text ChatText;      // 실제 채팅이 나오는 텍스트
@@ -199,11 +199,13 @@ public class Stage2ClosingTextPopup : MonoBehaviour
     }
     IEnumerator ClosingText() //("등장인물", "대사")로 입력
     {
-        yield return StartCoroutine(NormalChat("별하나", "안녕!! 반가워!!!나는 별하나야"));
-        yield return StartCoroutine(NormalChat("별하나", "나를 찾으러 와줬구나!"));
-        yield return StartCoroutine(NormalChat("별하나", "아무도 안오는 줄 알고 잠들뻔했잖아"));
-        yield return StartCoroutine(NormalChat("별하나", "우리 행성은 곧 영원한 밤이 될거야…"));
-        yield return StartCoroutine(NormalChat("별하나", "내 빛이 꺼지기 전에, 제발 나를 도와줘!"));
+        yield return StartCoroutine(NormalChat("포리아", "정말...왔구나..."));
+        yield return StartCoroutine(NormalChat("포리아", "부르긴 했지만 정말 올 줄은 몰랐어"));
+        yield return StartCoroutine(NormalChat("포리아", "난 별그물이야."));
+        yield return StartCoroutine(NormalChat("포리아", "사실 난 여기 있다고 해서 위험하진 않는데.."));
+        yield return StartCoroutine(NormalChat("포리아", "혼자는 외로워서.."));
+        yield return StartCoroutine(NormalChat("포리아", "나랑 있으면 위험할 수도 있지만.."));
+        yield return StartCoroutine(NormalChat("포리아", "나를 데려가줄래?"));
         SelectButton1.gameObject.SetActive(true);
         SelectButton2.gameObject.SetActive(true);
     }
@@ -211,17 +213,17 @@ public class Stage2ClosingTextPopup : MonoBehaviour
     IEnumerator TextSelect1() //("등장인물", "대사")로 입력
     {
         
-        yield return StartCoroutine(NormalChat("별하나", "야호! 모험을 떠나 볼까?"));
+        yield return StartCoroutine(NormalChat("", "별그물의 입가에 희미하게 미소가 번졌다."));
        
-        yield return StartCoroutine(NormalChat("", "별하나는 신난다는 듯이 당신의 로켓에 뛰어 갑니다."));
+        yield return StartCoroutine(NormalChat("", "별그물은 당신의 손에 살포시 손을 올려놓고 천천히 로켓으로 올라탔습니다."));
         CloseClosingText();
     }
     IEnumerator TextSelect2() //("등장인물", "대사")로 입력
     {
         
-        yield return StartCoroutine(NormalChat("별하나", "잘자...."));
+        yield return StartCoroutine(NormalChat("포리아", "음..그래.."));
 
-        yield return StartCoroutine(NormalChat("", "별하나는 슬픈 듯이 안대를 다시 씁니다. 그녀의 타오르는 눈빛을 다시는 못볼거 같군요."));
+        yield return StartCoroutine(NormalChat("", "별그물은 천천히 뒤돌아섰습니다. 혹시 벌써 후회하고 있나요?"));
         CloseClosingText();
     }
 
