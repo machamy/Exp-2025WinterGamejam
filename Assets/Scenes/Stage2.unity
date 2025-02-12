@@ -1103,6 +1103,7 @@ MonoBehaviour:
   ChatText: {fileID: 140654104}
   CharacterName: {fileID: 1836111577}
   ClosingTextPanel: {fileID: 141937463}
+  rocket: {fileID: 0}
   NextButton: {fileID: 824129767}
   SelectButton1: {fileID: 1944645700}
   SelectButton2: {fileID: 812485581}
@@ -3208,6 +3209,7 @@ MonoBehaviour:
   ChatText: {fileID: 140654104}
   CharacterName: {fileID: 1836111577}
   ClosingTextPanel: {fileID: 141937463}
+  rocket: {fileID: 0}
   NextButton: {fileID: 824129767}
   SelectButton1: {fileID: 1944645700}
   SelectButton2: {fileID: 812485581}
@@ -3272,6 +3274,7 @@ MonoBehaviour:
   ChatText: {fileID: 140654104}
   CharacterName: {fileID: 1836111577}
   ClosingTextPanel: {fileID: 141937463}
+  rocket: {fileID: 0}
   NextButton: {fileID: 824129767}
   SelectButton1: {fileID: 1944645700}
   SelectButton2: {fileID: 812485581}
@@ -4603,7 +4606,7 @@ MonoBehaviour:
   MainCamera: {fileID: 0}
   DebugPrint: 1
   ClearOnDisable: 1
-  DragThresholdDistance: 0.2
+  TouchSetting: {fileID: 11400000, guid: 11e8655337a2f68469146aa8928d029d, type: 2}
 --- !u!4 &1049068237
 Transform:
   m_ObjectHideFlags: 0
@@ -8117,6 +8120,7 @@ MonoBehaviour:
   ChatText: {fileID: 140654104}
   CharacterName: {fileID: 1836111577}
   ClosingTextPanel: {fileID: 141937463}
+  rocket: {fileID: 0}
   NextButton: {fileID: 824129767}
   SelectButton1: {fileID: 1944645700}
   SelectButton2: {fileID: 812485581}

@@ -18,13 +18,16 @@ public class TouchInputManager : SingletonBehaviour<TouchInputManager>
     {
         EnhancedTouchSupport.Enable();  
         MainCamera = Camera.main;
-        TouchSetting = ScriptableObject.FindFirstObjectByType<TouchSettingSO>();
+        
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        if(TouchSetting == null)
+            TouchSetting = ScriptableObject.FindFirstObjectByType<TouchSettingSO>();
+        if(TouchSetting == null)
+            ScriptableObject.CreateInstance<TouchSettingSO>();
     }
 
     public event Action<int,Vector2> OnTap;
