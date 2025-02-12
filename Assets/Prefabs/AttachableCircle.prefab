@@ -50,11 +50,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9174604153698967280, guid: f9e48ce1ce28db54db9ee07af856c848, type: 3}
       propertyPath: m_Name
-      value: Circle Variant
-      objectReference: {fileID: 0}
-    - target: {fileID: 9174604153698967280, guid: f9e48ce1ce28db54db9ee07af856c848, type: 3}
-      propertyPath: m_TagString
-      value: Attachable
+      value: AttachableCircle
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
