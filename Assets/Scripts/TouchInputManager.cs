@@ -129,6 +129,7 @@ public class TouchInputManager : SingletonBehaviour<TouchInputManager>
             if (touch.isTap)
             {
                 OnTap?.Invoke(id, pos);
+                OnTouchUp?.Invoke(id, pos);
             }
             else
             {
