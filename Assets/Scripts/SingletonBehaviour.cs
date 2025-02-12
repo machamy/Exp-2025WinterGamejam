@@ -6,7 +6,7 @@ namespace DefaultNamespace
     public class SingletonBehaviour<T> : MonoBehaviour where T : MonoBehaviour
     {
 
-        public T Instance
+        public static T Instance
         {
             get
             {
@@ -23,7 +23,7 @@ namespace DefaultNamespace
                 return instance;
             }
         }
-        private T instance;
+        private static T instance;
 
 
         private void Awake()
