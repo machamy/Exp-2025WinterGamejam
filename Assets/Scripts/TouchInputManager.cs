@@ -9,12 +9,14 @@ using TouchPhase = UnityEngine.InputSystem.TouchPhase;
 
 public class TouchInputManager : SingletonBehaviour<TouchInputManager>
 {
+    [SerializeField] private Camera MainCamera;
     [SerializeField] private bool DebugPrint = false;
     [SerializeField] private bool ClearOnDisable = true;
     [SerializeField] private float DragThresholdDistance = 5f;
     private void Awake()
     {
         EnhancedTouchSupport.Enable();  
+        MainCamera = Camera.main;
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -112,7 +114,10 @@ public class TouchInputManager : SingletonBehaviour<TouchInputManager>
         }
     }
     
-    
+    public Vector2 ScreenToWorldPoint(Vector2 screenPos)
+    {
+        return MainCamera.ScreenToWorldPoint(screenPos);
+    }
 
     // Update is called once per frame
     void Update()
@@ -136,7 +141,10 @@ public class TouchInputManager : SingletonBehaviour<TouchInputManager>
                         OnDragging?.Invoke(id,touch.startScreenPosition,pos);
                         break;
                     case TouchPhase.Stationary:
-                        OnTouching?.Invoke(id, pos);
+                        if(Vector2.Distance(touch.startScreenPosition, pos) <= DragThresholdDistance)
+                            OnTouching?.Invoke(id, pos);
+                        else
+                            OnDragging?.Invoke(id, touch.startScreenPosition,pos);
                         break;
                     case TouchPhase.Ended:
                         OnTouchUp?.Invoke(id, pos);
