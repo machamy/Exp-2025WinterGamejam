@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 
 public class Stage1 : MonoBehaviour
 {
-    
+    [SerializeField] private FuelStatus fuelStatus;
     public void LoadStageSelect()
     {
         SceneManager.LoadScene("StageSelect");
@@ -29,11 +29,11 @@ public class Stage1 : MonoBehaviour
     }
     public void FuelDecrease()
     {
-        FuelStatus.Instance.TriggerFuelDecrease();
+        fuelStatus.DecreaseFuel(1);
     }
     public void FuelSet()
     {
-        FuelStatus.Instance.FuelSet(25);
+        fuelStatus.SetFuel(25);
     }
 
 

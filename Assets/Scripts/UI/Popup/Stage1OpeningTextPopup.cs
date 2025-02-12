@@ -116,11 +116,10 @@ public class Stage1OpeningTextPopup : MonoBehaviour
 
     IEnumerator OpeningTextStage1() //("등장인물", "대사")로 입력
     {
-        yield return StartCoroutine(NormalChat("Character1", "Gamejam"));
-        yield return StartCoroutine(NormalChat("Character2", "Exp"));
-        yield return StartCoroutine(NormalChat("Character3", "Rocket"));
-        yield return StartCoroutine(NormalChat("Character7", "Hello world"));
-        yield return StartCoroutine(NormalChat("Character8", "Hello?"));
+        yield return StartCoroutine(NormalChat("주인공", "외계에서 구조신호가 옴"));
+        yield return StartCoroutine(NormalChat("주인공", "흐릿하지만 예쁜 외계인인거 같음"));
+        yield return StartCoroutine(NormalChat("주인공", "바로 구하러 가기 위해 우주선에 올라탐"));
+        
         yield return StartCoroutine(NormalChat("", "let's go"));
         CloseOpeningText();
     }
