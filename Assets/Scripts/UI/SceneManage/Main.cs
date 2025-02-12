@@ -14,16 +14,16 @@ public class Main : MonoBehaviour
         SceneManager.LoadScene("StageSelect");
     }
 
-    public GameObject settingsPopup; // ¼³Á¤ ÆË¾÷
-    public GameObject StageSelectPopup; // ½ºÅ×ÀÌÁö ¼±ÅÃ ÆË¾÷
+    public GameObject settingsPopup; // ì„¤ì • íŒì—…
+    public GameObject StageSelectPopup; // ìŠ¤í…Œì´ì§€ ì„ íƒ íŒì—…
 
-    // ¼³Á¤ ÆË¾÷ ¿­±â
+    // ì„¤ì • íŒì—… ì—´ê¸°
     public void OpenSettings()
     {
         settingsPopup.SetActive(true);
     }
 
-    // ¼³Á¤ ÆË¾÷ ´İ±â
+    // ì„¤ì • íŒì—… ë‹«ê¸°
     public void CloseSettings()
     {
         settingsPopup.SetActive(false);
@@ -33,7 +33,7 @@ public class Main : MonoBehaviour
         StageSelectPopup.SetActive(true);
     }
 
-    // ¼³Á¤ ÆË¾÷ ´İ±â
+    // ì„¤ì • íŒì—… ë‹«ê¸°
     public void CloseStageSelectPopup()
     {
         StageSelectPopup.SetActive(false);
