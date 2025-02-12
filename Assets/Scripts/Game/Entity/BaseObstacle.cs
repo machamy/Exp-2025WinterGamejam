@@ -13,6 +13,7 @@ public class BaseObstacle : MonoBehaviour
         Attachable,
         Unbreakable
     }
+    [SerializeField] private GameObject breakEffect = null;
     [SerializeField] private ObstacleType obstacleType = ObstacleType.None;
     [SerializeField] private float breakTime = 1f;
     [SerializeField] private float attachCooldown = 1f;
@@ -69,6 +70,11 @@ public class BaseObstacle : MonoBehaviour
     }
     public void Break()
     {
+        if(breakEffect != null)
+        {
+            var effect = Instantiate(breakEffect, transform.position, Quaternion.identity);
+            Destroy(effect, 3f);
+        }
         Destroy(gameObject);
     }
 

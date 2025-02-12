@@ -9,11 +9,14 @@ using UnityEngine.Serialization;
 [RequireComponent(typeof(Rigidbody2D), typeof(FixedJoint2D))]
 public class Rocket : MonoBehaviour
 {
-
+    [Header("References")]
     private Rigidbody2D rbody;
     private FixedJoint2D joint;
+    [SerializeField]private SpriteRenderer spriteRenderer;
+    [Header("Event Channel")]
+    [SerializeField] private AlertEventChannel alertEventChannel;
 
-    [Header("Rocket Settings")]
+    [Header("Rocket Settings(Movement)")]
     [SerializeField] private bool useAngularVelocity = false;
     [SerializeField] private bool updateSpeedOnTick = true;
     [SerializeField] private float speed = 5f;
@@ -21,10 +24,12 @@ public class Rocket : MonoBehaviour
     [SerializeField] private float maxFuel = 100f;
     [SerializeField] private float boostCost =  1f;
     [SerializeField] private float rotateCost = 1f;
-    [FormerlySerializedAs("applayGravityArea")] [SerializeField] private bool applyGravityArea = true;
+    [Header("Rocket Settings(Interraction)")]
+    [SerializeField] private bool applyGravityArea = true;
     [SerializeField] private float gravityRotationSpeed = 1f;
     [SerializeField] private bool applyHeatArea = true;
-    
+    [SerializeField] private Color originalColor = Color.white;
+    [SerializeField] private Color heatColor = Color.red;
     
     [Header("Rocket State")]
     [SerializeField] private float fuel = 100f;
@@ -83,6 +88,8 @@ public class Rocket : MonoBehaviour
     {
         rbody = GetComponent<Rigidbody2D>();
         joint = GetComponent<FixedJoint2D>();
+        if(!spriteRenderer)
+            spriteRenderer = GetComponent<SpriteRenderer>();
         rbody.gravityScale = 0;
         fuel = maxFuel;
         previousPosition = transform.position;
@@ -106,6 +113,7 @@ public class Rocket : MonoBehaviour
     public Vector2 BoostVelocity => up * boostSpeed;
     private void Start()
     {
+        originalColor = spriteRenderer.color;
         UpdatePassengerState();
         Launch();
     }
@@ -161,7 +169,7 @@ public class Rocket : MonoBehaviour
 
             if (gravity != Vector2.zero)
             {
-                PointDirectionSmooth(vel, gravityRotationSpeed, false);
+                PointDirectionSmooth(vel, gravityRotationSpeed, false,false);
             }
         }
         rbody.linearVelocity = vel;
@@ -208,6 +216,7 @@ public class Rocket : MonoBehaviour
     public void UpdatePassengerState()
     {
         maxFuel = fuelArr[passengers.Count];
+        fuel = maxFuel;
         transform.localScale = Vector3.one * sizeArr[passengers.Count];
     }
 
@@ -240,33 +249,27 @@ public class Rocket : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        
-    }
+    // private void OnTriggerEnter(Collider other)
+    // {
+    //     
+    // }
+    //
+    // private void OnCollisionExit2D(Collision2D other)
+    // {
+    //     
+    // }
+    //
+    // private void OnTriggerExit(Collider other)
+    // {
+    //     
+    // }
     
-    private void OnCollisionExit2D(Collision2D other)
-    {
-        
-    }
-    
-    private void OnTriggerExit(Collider other)
-    {
-        
-    }
-
-    private void Move()
-    {
-        
-        
-    }
-
     public void PointTo(Vector2 target,bool updateSpeed = true)
     {
         PointDirection(target - (Vector2)transform.position,updateSpeed);
     }
     
-    public void PointDirection(Vector2 dir,bool updateSpeed = true)
+    public void PointDirection(Vector2 dir,bool useFuel = true, bool updateSpeed = true)
     {
         // transform.up = dir.normalized;
         var rot = Quaternion.LookRotation(Vector3.forward, dir).eulerAngles.z;
@@ -278,28 +281,37 @@ public class Rocket : MonoBehaviour
             UpdateSpeed();
     }
 
-    public void PointDirectionSmooth(Vector2 dir, float smoothness,bool updateSpeed = true)
+    public void PointDirectionSmooth(Vector2 dir, float smoothness,bool useFuel = true,bool updateSpeed = true)
     {
         var targetRot = Quaternion.LookRotation(Vector3.forward, dir).eulerAngles.z;
         var currentRot = rbody.rotation;
         var newRot = Mathf.LerpAngle(currentRot, targetRot, smoothness * Time.fixedDeltaTime);
         rbody.SetRotation(newRot);
-        fuel -= rotateCost;
+        if(useFuel)
+            fuel -= rotateCost;
+        // fuel -= rotateCost;
         if(updateSpeed)
          UpdateSpeed();
     }
     
     public void OnHeatAreaEnter(HeatArea area)
     {
+        if (!applyHeatArea)
+            return;
         if (heatAreas.Contains(area))
         {
             return;
         }
         if(!IsOnHeat)
+        {
+            heatAreas.Add(area);
+            alertEventChannel.RaiseStartAlert(heatTime);
             StartCoroutine(HeatRoutine());
-        heatAreas.Add(area);
-        
-        // TODO : UI 나오게
+        }
+        else
+        {
+            heatAreas.Add(area);
+        }
     }
     
     private IEnumerator HeatRoutine()
@@ -310,14 +322,20 @@ public class Rocket : MonoBehaviour
         {
             yield return new WaitForFixedUpdate();
             currentHeat += Time.fixedDeltaTime;
+            float t = currentHeat / heatTime;
+            spriteRenderer.color = Color.Lerp(originalColor, heatColor, t);
+            alertEventChannel.RaiseUpdateAlert(heatTime, currentHeat);
             if(!IsOnHeat)
                 break;
         }
+        alertEventChannel.RaiseEndAlert(currentHeat);
         Die();
     }
     
     public void OnHeatAreaExit(HeatArea area)
     {
+        alertEventChannel.RaiseEndAlert(currentHeat);
+        spriteRenderer.color = originalColor;
         if(!heatAreas.Contains(area))
             return;
         heatAreas.Remove(area);

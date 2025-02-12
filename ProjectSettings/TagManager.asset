@@ -43,5 +43,8 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Rocket
+    uniqueID: 1790775811
+    locked: 0
   m_RenderingLayers:
   - Default

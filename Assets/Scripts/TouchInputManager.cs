@@ -12,11 +12,13 @@ public class TouchInputManager : SingletonBehaviour<TouchInputManager>
     [SerializeField] private Camera MainCamera;
     [SerializeField] private bool DebugPrint = false;
     [SerializeField] private bool ClearOnDisable = true;
-    [SerializeField] private float DragThresholdDistance = 5f;
+    [SerializeField] private TouchSettingSO TouchSetting;
+    private float DragThresholdDistance => TouchSetting.dragThreshold;
     private void Awake()
     {
         EnhancedTouchSupport.Enable();  
         MainCamera = Camera.main;
+        TouchSetting = ScriptableObject.FindFirstObjectByType<TouchSettingSO>();
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

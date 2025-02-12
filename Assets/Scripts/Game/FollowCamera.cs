@@ -10,6 +10,7 @@ public class FollowCamera : MonoBehaviour
     private void Awake()
     {
         cam = Camera.main;
+        transform.position = target.position;
     }
 
     private void FixedUpdate()

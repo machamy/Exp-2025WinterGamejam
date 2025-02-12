@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/Assets/Scripts/UI/Popup/Stage1ClosingTextPopup.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/Scripts/UI/Popup/Stage1OpeningTextPopup.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/Scripts/UI/Popup/Stage2ClosingTextPopup.cs" charset="x-windows-949" />
+    <file url="file://$PROJECT_DIR$/Assets/Scripts/UI/Popup/Stage3ClosingTextPopup.cs" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/Assets/Scripts/UI/SceneManage/Main.cs" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Assets/Scripts/UI/Sound/BGMSlider.cs" charset="x-windows-949" />
     <file url="file://$PROJECT_DIR$/Assets/Scripts/UI/Sound/SFXSlider.cs" charset="x-windows-949" />
