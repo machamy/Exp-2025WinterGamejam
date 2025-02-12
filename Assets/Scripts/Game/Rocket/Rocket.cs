@@ -122,7 +122,7 @@ public class Rocket : MonoBehaviour
             rbody.angularVelocity = 0;
         if (updateSpeedOnTick)
             UpdateSpeed();
-        if (IsBoosting && State!=RocketState.Dead)
+        if (State == RocketState.BreakingAttached || IsBoosting && State!=RocketState.Dead)
         {
             fuel -= boostCost * Time.fixedDeltaTime;
             if (fuel <= 0)
