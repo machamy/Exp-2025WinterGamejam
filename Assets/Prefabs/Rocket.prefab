@@ -53,13 +53,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 6468748549261904223}
   alertEventChannel: {fileID: 11400000, guid: 399852c8c721a734494a5c93e2ee95ee, type: 2}
+  onClearEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Stage2ClosingTextPopup, Assembly-CSharp
+        m_MethodName: OnClear
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  onFailEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: StageFailPopup, Assembly-CSharp
+        m_MethodName: OnFail
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   useAngularVelocity: 0
   updateSpeedOnTick: 1
   speed: 1.5
   boostSpeed: 7
   maxFuel: {fileID: 11400000, guid: 168eb23b31270714db56d9f557774fd3, type: 2}
   boostCost: 2
-  rotateCost: 0.5
+  rotateCost: 0.2
   applyGravityArea: 1
   gravityRotationSpeed: 5
   applyHeatArea: 1
@@ -67,7 +97,7 @@ MonoBehaviour:
   heatColor: {r: 1, g: 0, b: 0, a: 1}
   fuelVariable: {fileID: 11400000, guid: bc34bd16ed73bab4fbea070f35dda222, type: 2}
   currentHeat: 0
-  heatTime: 4
+  heatTime: 3
   state: 0
   isBoosting: 0
   passengers: {fileID: 11400000, guid: 7dc0088f52d16104cac2099fe6a6e273, type: 2}
