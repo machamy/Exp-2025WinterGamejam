@@ -117,7 +117,17 @@ public class Stage1OpeningTextPopup : MonoBehaviour
         yield return StartCoroutine(NormalChat("", "외계에서 구조신호가 오고있다."));
         yield return StartCoroutine(NormalChat("주인공", "흐릿하지만 예쁜 외계인인거 같은데..."));
         yield return StartCoroutine(NormalChat("주인공", "나는 외계인이 좋아! 바로 만나러 가자!"));
-        
+
+        if (GameManager.DoTutorial == true)
+        {
+            yield return StartCoroutine(NormalChat("", "로켓은 별도의 조작이 없으면 계속 앞으로 나갑니다."));
+            yield return StartCoroutine(NormalChat("", "로켓을 조작하기 위해서는 연료가 필요합니다."));
+            yield return StartCoroutine(NormalChat("", "화면을 슬라이드하면 로켓의 진행 방향이 바뀝니다."));
+            yield return StartCoroutine(NormalChat("", "화면을 꾹 누르면 부스터가 발동해 빨라집다."));
+            yield return StartCoroutine(NormalChat("", "부스터가 발동된 상태에서는 일부 장애물이 파괴됩니다."));
+            GameManager.DoTutorial = false;
+        }
+
         yield return StartCoroutine(NormalChat("", "let's go"));
         CloseOpeningText();
     }

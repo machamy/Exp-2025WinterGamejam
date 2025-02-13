@@ -20,6 +20,7 @@ public class GameManager : SingletonBehaviour<GameManager>
          Dead
     }
 
+    public static bool DoTutorial =  true;
     
     public static SoundManager Sound => SoundManager.Instance;
 
