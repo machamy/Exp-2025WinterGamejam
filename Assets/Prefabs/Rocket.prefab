@@ -57,7 +57,7 @@ MonoBehaviour:
   updateSpeedOnTick: 1
   speed: 1.5
   boostSpeed: 7
-  maxFuel: 100
+  maxFuel: {fileID: 11400000, guid: 168eb23b31270714db56d9f557774fd3, type: 2}
   boostCost: 2
   rotateCost: 0.5
   applyGravityArea: 1

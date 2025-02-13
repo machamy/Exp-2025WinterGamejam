@@ -49,7 +49,7 @@ public class FuelStatus : MonoBehaviour
     {
         if (fuelImage == null)
             return;
-
+        // print(fuel);
         // 기본 계산: 25에서 시작, 1씩 줄면 -20씩 이동
         float usedFuel = 25 - fuel;
         float finalX = baseX - (usedFuel * baseMove);

@@ -23,9 +23,15 @@ public class Rocket : MonoBehaviour
     [SerializeField] private bool updateSpeedOnTick = true;
     [SerializeField] private float speed = 5f;
     [SerializeField] private float boostSpeed = 10f;
-    [SerializeField] private float maxFuel = 100f;
+    [SerializeField] private FloatVariableSO maxFuel;
     [SerializeField] private float boostCost =  1f;
     [SerializeField] private float rotateCost = 1f;
+    
+    public float MaxFuel
+    {
+        get => maxFuel.Value;
+        private set => maxFuel.Value = value;
+    }
     [Header("Rocket Settings(Interraction)")]
     [SerializeField] private bool applyGravityArea = true;
     [SerializeField] private float gravityRotationSpeed = 1f;
@@ -99,7 +105,7 @@ public class Rocket : MonoBehaviour
         if(!spriteRenderer)
             spriteRenderer = GetComponent<SpriteRenderer>();
         rbody.gravityScale = 0;
-        Fuel = maxFuel;
+        Fuel = MaxFuel;
         previousPosition = transform.position;
         deltaPosition = Vector2.zero;
         rbody.centerOfMass = Vector2.up;
@@ -134,11 +140,16 @@ public class Rocket : MonoBehaviour
     public void StartBoost()
     {
         if(Fuel <= 0) return;
+        if (!IsBoosting)
+        {
+            SoundManager.Instance.PlaySFX(SoundData.Sound.RocketBoost, 1f, true);
+        }
         IsBoosting = true;
     }
     
     public void EndBoost()
     {
+        SoundManager.Instance.StopSFX(SoundData.Sound.RocketBoost);
         IsBoosting = false;
     }
 
@@ -223,8 +234,8 @@ public class Rocket : MonoBehaviour
     [ContextMenu("Update Passenger State")]
     public void UpdatePassengerState()
     {
-        maxFuel = fuelArr[passengers.Count];
-        Fuel = maxFuel;
+        MaxFuel = fuelArr[passengers.Count];
+        Fuel = MaxFuel;
         transform.localScale = Vector3.one * sizeArr[passengers.Count];
     }
 
@@ -413,6 +424,9 @@ public class Rocket : MonoBehaviour
     {
         State = RocketState.Dead;
         Debug.Log("Rocket Died");
+        SoundManager.Instance.PlayBGM(SoundData.Sound.GameOver);
+        SoundManager.Instance.StopSFX();
+        SoundManager.Instance.PlaySFX(SoundData.Sound.RocketExplosion, 1f);
         gameObject.SetActive(false);
     }
 }

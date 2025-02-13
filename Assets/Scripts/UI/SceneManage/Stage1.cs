@@ -7,27 +7,27 @@ using UnityEngine.EventSystems;
 
 public class Stage1 : MonoBehaviour
 {
-    [SerializeField] private FuelStatus fuelStatus;
-    public void LoadStageSelect()
-    {
-        SceneManager.LoadScene("StageSelect");
-    }
-
-    public GameObject settingsPopup; // 설정 팝업
-    public GameObject StageSelectPopup; // 스테이지 선택 팝업
-
-    // 설정 팝업 열기
-    public void OpenSettings()
-    {
-        settingsPopup.SetActive(true);
-    }
-
-    // 설정 팝업 닫기
-    public void CloseSettings()
-    {
-        settingsPopup.SetActive(false);
-    }
-
+    // [SerializeField] private FuelStatus fuelStatus;
+    // public void LoadStageSelect()
+    // {
+    //     SceneManager.LoadScene("StageSelect");
+    // }
+    //
+    // public GameObject settingsPopup; // 설정 팝업
+    // public GameObject StageSelectPopup; // 스테이지 선택 팝업
+    //
+    // // 설정 팝업 열기
+    // public void OpenSettings()
+    // {
+    //     settingsPopup.SetActive(true);
+    // }
+    //
+    // // 설정 팝업 닫기
+    // public void CloseSettings()
+    // {
+    //     settingsPopup.SetActive(false);
+    // }
+    //
 
 
 }

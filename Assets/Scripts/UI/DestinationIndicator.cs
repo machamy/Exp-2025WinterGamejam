@@ -27,7 +27,7 @@ public class DestinationIndicator : MonoBehaviour
 
     private void Start()
     {
-        if(clearArea.IsVisible)
+        if(!clearArea.IsVisible)
         {
             gameObject.SetActive(true);
         }
@@ -59,24 +59,25 @@ public class DestinationIndicator : MonoBehaviour
 
     private void OnClearAreaVisible(ClearArea clearArea)
     {
-        gameObject.SetActive(true);
+        gameObject.SetActive(false);
     }
 
     private void FixedUpdate()
     {
-        if(clearArea.IsVisible)
+        if(!clearArea.IsVisible)
         {
             var targetPosition = clearArea.transform.position;
             var screenPos = mainCamera.WorldToScreenPoint(targetPosition);
             var x = Mathf.Clamp(screenPos.x, padding, width - padding);
             var y = Mathf.Clamp(screenPos.y, padding, height - padding);
-            transform.up = targetPosition - mainCamera.transform.position;
+            float rotation = Quaternion.LookRotation(Vector3.forward, targetPosition - mainCamera.transform.position).eulerAngles.z;
+            transform.rotation = Quaternion.Euler(0, 0, rotation);
             transform.position = new Vector3(x, y, 0);
         }
     }
 
     private void OnClearAreaInvisible(ClearArea clearArea)
     {
-        gameObject.SetActive(false);
+        gameObject.SetActive(true);
     }
 }

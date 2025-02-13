@@ -249,6 +249,8 @@ public class Stage3ClosingTextPopup : MonoBehaviour
     }
     void CloseClosingText()
     {
+        SoundManager.Instance.PlayBGM(SoundData.Sound.StageBgm);
+        SoundManager.Instance.PlayBGM(SoundData.Sound.MiYeonsi);
         GameManager.Instance.State = GameManager.GameState.Running;
         ClosingTextPanel.SetActive(false); // 패널 비활성화
         isFirstTime1 = false;

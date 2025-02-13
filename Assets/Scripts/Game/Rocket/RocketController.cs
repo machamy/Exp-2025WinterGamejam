@@ -78,6 +78,7 @@ public class RocketController : MonoBehaviour
 
     private void OnDragEnd(int id, Vector2 pos, Vector2 endPos)
     {
+        
         if(GameManager.Instance.State != GameManager.GameState.Running)
             return;
         if(rocket.State == Rocket.RocketState.Attached)
