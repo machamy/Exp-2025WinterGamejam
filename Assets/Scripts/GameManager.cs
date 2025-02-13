@@ -50,6 +50,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     public void GoToStage(int stage)
     {
         State = GameState.Running;
+        _stage = stage;
         switch (stage)
         {
             case 1:
