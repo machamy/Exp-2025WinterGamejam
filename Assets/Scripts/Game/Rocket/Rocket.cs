@@ -5,6 +5,7 @@ using DefaultNamespace;
 using DefaultNamespace.Game;
 using NUnit.Framework;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Serialization;
 
 [RequireComponent(typeof(Rigidbody2D), typeof(FixedJoint2D))]
@@ -16,6 +17,8 @@ public class Rocket : MonoBehaviour
     [SerializeField]private SpriteRenderer spriteRenderer;
     [Header("Event Channel")]
     [SerializeField] private AlertEventChannel alertEventChannel;
+    [SerializeField] private UnityEvent onClearEvent;
+    [SerializeField] private UnityEvent onFailEvent;
     // [SerializeField] private FloatVariableSO fuelVariableChannel;
 
     [Header("Rocket Settings(Movement)")]
@@ -59,7 +62,7 @@ public class Rocket : MonoBehaviour
     public float RemainingHeatTime => heatTime - currentHeat;
     public bool IsAbsAttached => state == RocketState.Attached || state == RocketState.BreakingAttached;
     [Header("Passenger")]
-    [SerializeField] private List<int> passengers = new List<int>();
+    [SerializeField] private IntListVariableSO passengers;
     // [SerializeField] private FloatListVariableSO passengerListVariable;
     [SerializeField] private float[] sizeArr = new []{1f,1.3f,1.69f,2.2f,2.86f};
     [SerializeField] private float[] fuelArr = new []{25f,20f,15f,10f,5f};
@@ -210,7 +213,7 @@ public class Rocket : MonoBehaviour
     #endif
     public void AddPassenger(int id)
     {
-        passengers.Add(id);
+        passengers.AddValue(id);
         UpdatePassengerState();
     }
     
@@ -222,7 +225,7 @@ public class Rocket : MonoBehaviour
     
     public List<int> GetPassenger()
     {
-        return new List<int>(passengers);
+        return new List<int>(passengers.Value);
     }
     
     public void ClearPassenger()
@@ -234,6 +237,7 @@ public class Rocket : MonoBehaviour
     [ContextMenu("Update Passenger State")]
     public void UpdatePassengerState()
     {
+        print("Update Passenger State");
         MaxFuel = fuelArr[passengers.Count];
         Fuel = MaxFuel;
         transform.localScale = Vector3.one * sizeArr[passengers.Count];
@@ -368,12 +372,7 @@ public class Rocket : MonoBehaviour
             currentHeat = 0;
     }
 
-    public void OnClearAreaEnter()
-    {
-        // TODO : CLEAR
-        Debug.Log("Clear!!!");
-        State = RocketState.Clear;
-    }
+
     
     public void AddGravityArea(GravityArea area)
     {
@@ -420,6 +419,16 @@ public class Rocket : MonoBehaviour
         joint.enabled = false;
         State = state;
     }
+    
+    [ContextMenu("Clear")]
+    public void OnClearAreaEnter()
+    {
+        // TODO : CLEAR
+        Debug.Log("Clear!!!");
+        GameManager.Instance.StageClear();
+        State = RocketState.Clear;
+        onClearEvent.Invoke();
+    }
     public void Die()
     {
         State = RocketState.Dead;
@@ -427,6 +436,7 @@ public class Rocket : MonoBehaviour
         SoundManager.Instance.PlayBGM(SoundData.Sound.GameOver);
         SoundManager.Instance.StopSFX();
         SoundManager.Instance.PlaySFX(SoundData.Sound.RocketExplosion, 1f);
+        onFailEvent.Invoke();
         gameObject.SetActive(false);
     }
 }

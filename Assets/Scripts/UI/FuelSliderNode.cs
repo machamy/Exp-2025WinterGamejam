@@ -13,7 +13,7 @@ public class FuelSliderNode : MonoBehaviour
 
     private void Awake()
     {
-        startX = -fillBar.GetComponent<Image>().rectTransform.localScale.x;
+        startX = -fillBar.GetComponent<Image>().rectTransform.rect.width;
     }
 
     public float Value

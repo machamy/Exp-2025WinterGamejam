@@ -36,11 +36,19 @@ public class SceneLoader : MonoBehaviour
 
     public void LoadStage2()
     {
+        if (GameManager.Instance.MaxStage < 2)
+        {
+            return;
+        }
         GameManager.Instance.GoToStage(2);
     }
 
     public void LoadStage3()
     {
+        if (GameManager.Instance.MaxStage < 3)
+        {
+            return;
+        }
         GameManager.Instance.GoToStage(3);
     }
 }

@@ -20,9 +20,11 @@ public class FuelSlider : MonoBehaviour
     
     private void UpdateFuelUI(float fuel)
     {
+        // print(fuel);
         if (fuelVariableSo == null)
             return;
-        int idx = (int)fuel / (int)fuelSliderNodes.Length;
+        int n = (int) 25 / fuelSliderNodes.Length;
+        int idx = (int)fuel / (int)n;
         for(int i = 0; i < idx; i++)
         {
             fuelSliderNodes[i].Value = 1;

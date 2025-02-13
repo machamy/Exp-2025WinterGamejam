@@ -70,7 +70,7 @@ MonoBehaviour:
   heatTime: 4
   state: 0
   isBoosting: 0
-  passengers: 
+  passengers: {fileID: 11400000, guid: 7dc0088f52d16104cac2099fe6a6e273, type: 2}
   sizeArr:
   - 1
   - 1.3

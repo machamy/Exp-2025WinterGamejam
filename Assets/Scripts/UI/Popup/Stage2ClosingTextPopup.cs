@@ -1,13 +1,17 @@
 using System.Collections.Generic;
 using System.Collections;
+using DefaultNamespace;
+using DefaultNamespace.UI.Popup;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using TMPro.Examples;
 
-public class Stage2ClosingTextPopup : MonoBehaviour
+public class Stage2ClosingTextPopup : MonoBehaviour, IClearLisenter
 {
+    [SerializeField] private GameObject ClearPopup;
+    [SerializeField] private IntListVariableSO Passengers;
     [Header("참조 요소들")]
     public TMP_Text ChatText;      // 실제 채팅이 나오는 텍스트
     public TMP_Text CharacterName; // 캐릭터 이름이 나오는 텍스트
@@ -209,12 +213,13 @@ public class Stage2ClosingTextPopup : MonoBehaviour
     IEnumerator TextSelect1() //("등장인물", "대사")로 입력
     {
         //스테이지 2 캐릭터 로켓 탑승 여부
-        istakenStage2 = true;
-        Debug.Log(istakenStage2);
-
         yield return StartCoroutine(NormalChat("별하나", "야호! 모험을 떠나 볼까?"));
        
         yield return StartCoroutine(NormalChat("", "별하나는 신난다는 듯이 당신의 로켓에 뛰어 갑니다."));
+        if (!Passengers.Contains(2))
+        {
+            Passengers.AddValue(2);
+        }
         CloseClosingText();
     }
     IEnumerator TextSelect2() //("등장인물", "대사")로 입력
@@ -236,13 +241,8 @@ public class Stage2ClosingTextPopup : MonoBehaviour
         Time.timeScale = 1f;
         SceneManager.LoadScene("Stage3");
         //Player.SetActive(true);
-
+        ClearPopup.SetActive(true);
         //Fuel.SetActive(true);
-        if (istakenStage2)
-        {
-            rocket.AddPassenger(1);
-            Debug.Log(rocket.PassengerCount);
-        }
 
     }
 }

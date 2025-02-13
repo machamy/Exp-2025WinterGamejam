@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DefaultNamespace;
@@ -23,11 +24,27 @@ public class GameManager : SingletonBehaviour<GameManager>
     public static SoundManager Sound => SoundManager.Instance;
 
     public GameState State = GameState.None;
- 
+    private int _stage = 0;
+    public int Stage => _stage;
+
+    private int maxStage = 1;
+    public int MaxStage => maxStage;
+
+    private void OnEnable()
+    {
+        maxStage = PlayerPrefs.GetInt("MaxStage", 1);
+    }
+    
+    private void OnDisable()
+    {
+        PlayerPrefs.SetInt("MaxStage", maxStage);
+    }
+
     public void GoToMain()
     {
         State = GameState.Main;
         SceneManager.LoadScene("Main");
+        PlayerPrefs.SetInt("SkipIntro", 1);
     }
     
     public void GoToStage(int stage)
@@ -50,5 +67,17 @@ public class GameManager : SingletonBehaviour<GameManager>
         }
         SoundManager.Instance.PlayBGM(SoundData.Sound.StageBgm);
         Time.timeScale = 1.0f;
+    }
+    
+    public void StageClear() => StageClear(_stage);
+    public void StageClear(int stage)
+    {
+        if (stage == _stage)
+        {
+            if (stage == maxStage)
+            {
+                maxStage++;
+            }
+        }
     }
 }

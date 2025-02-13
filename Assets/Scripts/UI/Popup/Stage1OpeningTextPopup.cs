@@ -1,12 +1,15 @@
 using System.Collections.Generic;
 using System.Collections;
+using DefaultNamespace.UI.Popup;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Events;
 
 public class Stage1OpeningTextPopup : MonoBehaviour
 {
+    [SerializeField]UnityEvent OnComplete = new UnityEvent();
     [Header("참조 요소들")]
     public TMP_Text ChatText;      // 실제 채팅이 나오는 텍스트
     public TMP_Text CharacterName; // 캐릭터 이름이 나오는 텍스트
@@ -126,6 +129,7 @@ public class Stage1OpeningTextPopup : MonoBehaviour
         
         Time.timeScale = 1f;
         
+        OnComplete.Invoke();
         //Player.SetActive(true);
         
         //Fuel.SetActive(true);

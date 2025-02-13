@@ -1,13 +1,17 @@
 using System.Collections.Generic;
 using System.Collections;
+using DefaultNamespace;
+using DefaultNamespace.UI.Popup;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using TMPro.Examples;
 
-public class Stage3ClosingTextPopup : MonoBehaviour
+public class Stage3ClosingTextPopup : MonoBehaviour, IClearLisenter
 {
+    [SerializeField] private GameObject ClearPopup;
+    [SerializeField] private IntListVariableSO Passengers;
     [Header("참조 요소들")]
     public TMP_Text ChatText;      // 실제 채팅이 나오는 텍스트
     public TMP_Text CharacterName; // 캐릭터 이름이 나오는 텍스트
@@ -44,6 +48,7 @@ public class Stage3ClosingTextPopup : MonoBehaviour
     void Open()
     {
         GameManager.Instance.State = GameManager.GameState.Dialog;
+        SoundManager.Instance.PlayBGM(SoundData.Sound.MiYeonsi);
         ClosingTextPanel.SetActive(true);
         Time.timeScale = 0f; // 게임을 일시정지하고 대화만 진행
 
@@ -211,13 +216,15 @@ public class Stage3ClosingTextPopup : MonoBehaviour
     IEnumerator TextSelect1() //("등장인물", "대사")로 입력
     {
         //스테이지 3 캐릭터 로켓 탑승 여부
-        istakenStage3 = true;
-        Debug.Log(istakenStage3);
-        rocket.AddPassenger(1);
-        Debug.Log(rocket.PassengerCount);
+        
+        
         yield return StartCoroutine(NormalChat("", "별그물의 입가에 희미하게 미소가 번졌다."));
        
         yield return StartCoroutine(NormalChat("", "별그물은 당신의 손에 살포시 손을 올려놓고 천천히 로켓으로 올라탔습니다."));
+        if (!Passengers.Contains(3))
+        {
+            Passengers.AddValue(3);
+        }
         StartCoroutine(EndingText());
     }
     IEnumerator TextSelect2() //("등장인물", "대사")로 입력
@@ -231,18 +238,26 @@ public class Stage3ClosingTextPopup : MonoBehaviour
 
     
 
+    [SerializeField] Image standImage;
+    [SerializeField] Sprite[] standSprites;
     IEnumerator EndingText()
     {
-        if (Stage1ClosingTextPopup.istakenStage1)
+        if (Passengers.Contains(1))
         {
-            yield return StartCoroutine(NormalChat("점슬이", "..."));
+            standImage.sprite = standSprites[0];
+            standImage.SetNativeSize();
+            yield return StartCoroutine(NormalChat("점슬이", "점슬이도 고맙다냥"));
         }
-        if (Stage2ClosingTextPopup.istakenStage2)
+        if (Passengers.Contains(2))
         {
+            standImage.sprite = standSprites[1];
+            standImage.SetNativeSize();
             yield return StartCoroutine(NormalChat("별하나", "정말 고마워!! 덕분에 살았어"));
         }
-        if (istakenStage3)
+        if (Passengers.Contains(3))
         {
+            standImage.sprite = standSprites[2];
+            standImage.SetNativeSize();
             yield return StartCoroutine(NormalChat("별그물", "고마워…"));
         }
         CloseClosingText();
@@ -256,6 +271,13 @@ public class Stage3ClosingTextPopup : MonoBehaviour
         isFirstTime1 = false;
         Time.timeScale = 1f;
 
+
+        IEnumerator GOHELL()
+        {
+            yield return  new WaitForSeconds(5f);
+            rocket.Die();
+        }
+        StartCoroutine(GOHELL());
         //Player.SetActive(true);
 
         //Fuel.SetActive(true);

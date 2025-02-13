@@ -1,13 +1,17 @@
 using System.Collections.Generic;
 using System.Collections;
+using DefaultNamespace;
+using DefaultNamespace.UI.Popup;
 using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using TMPro.Examples;
 
-public class Stage1ClosingTextPopup : MonoBehaviour
+public class Stage1ClosingTextPopup : MonoBehaviour, IClearLisenter
 {
+    [SerializeField] private GameObject ClearPopup;
+    [SerializeField] private IntListVariableSO  Passengers;
     [Header("참조 요소들")]
     public TMP_Text ChatText;      // 실제 채팅이 나오는 텍스트
     public TMP_Text CharacterName; // 캐릭터 이름이 나오는 텍스트
@@ -20,8 +24,7 @@ public class Stage1ClosingTextPopup : MonoBehaviour
     [Header("플레이어 오브젝트")]
     [SerializeField] private GameObject Player;
     [SerializeField] private GameObject Fuel;
-
-    public static bool istakenStage1 = false;
+    
 
     [Header("클로징 스크립트 캐릭터 스프라이트")]
     public GameObject CharacterPose1; 
@@ -208,13 +211,14 @@ public class Stage1ClosingTextPopup : MonoBehaviour
     IEnumerator TextSelect1() //("등장인물", "대사")로 입력
     {
 
-        //스테이지 1 캐릭터 로켓 탑승 여부
-        istakenStage1 = true;
-        Debug.Log(istakenStage1);
-        
+
         yield return StartCoroutine(NormalChat("점슬이", "흥~♡ 내가 원해서 따라가는게 아니라구!"));
        
         yield return StartCoroutine(NormalChat("", "점슬이는 당신에게 엎혀 우주선에 올라탔습니다."));
+        if (Passengers.Value.Contains(1))
+        {
+            Passengers.Value.Remove(1);
+        }
         CloseClosingText();
     }
     IEnumerator TextSelect2() //("등장인물", "대사")로 입력
@@ -225,7 +229,7 @@ public class Stage1ClosingTextPopup : MonoBehaviour
         yield return StartCoroutine(NormalChat("", "점슬이는 토라진 얼굴로 당신을 지나쳐 뛰쳐나갑니다."));
         CloseClosingText();
     }
-
+    [SerializeField] private GameObject EndingPanel;
     void CloseClosingText()
     {
         SoundManager.Instance.PlayBGM(SoundData.Sound.StageBgm);
@@ -233,15 +237,9 @@ public class Stage1ClosingTextPopup : MonoBehaviour
         ClosingTextPanel.SetActive(false); // 패널 비활성화
         isFirstTime1 = false;
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Stage2");
         //Player.SetActive(true);
-
+ClearPopup.SetActive(true);
         //Fuel.SetActive(true);
-        if (istakenStage1)
-        {
-            rocket.AddPassenger(1);
-            Debug.Log(rocket.PassengerCount);
-        }
     }
 }
 
