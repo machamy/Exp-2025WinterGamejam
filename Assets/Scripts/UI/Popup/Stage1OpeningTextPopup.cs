@@ -46,6 +46,7 @@ public class Stage1OpeningTextPopup : MonoBehaviour
     {
         GameManager.Instance.State = GameManager.GameState.Dialog;
         OpeningTextPanel.SetActive(true);
+        SoundManager.Instance.PlayBGM(SoundData.Sound.MiYeonsi);
         Time.timeScale = 0f; // 게임을 일시정지하고 대화만 진행할 경우 (원하시면 조절)
 
         // 버튼 리스너 세팅(중복 등록 방지 위해 먼저 RemoveAllListeners)
@@ -134,6 +135,7 @@ public class Stage1OpeningTextPopup : MonoBehaviour
 
     void CloseOpeningText()
     {
+        SoundManager.Instance.PlayBGM(SoundData.Sound.StageBgm);
         GameManager.Instance.State = GameManager.GameState.Running;
         OpeningTextPanel.SetActive(false); // 패널 비활성화
         

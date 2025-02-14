@@ -1334,6 +1334,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f67474708b539409ca7b0390468d6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageButtons: []
   settingsPopup: {fileID: 1020708132}
   StageSelectPopup: {fileID: 0}
 --- !u!114 &216330644
@@ -4239,6 +4240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f67474708b539409ca7b0390468d6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageButtons: []
   settingsPopup: {fileID: 1020708132}
   StageSelectPopup: {fileID: 0}
 --- !u!114 &681704089
@@ -6120,6 +6122,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FailPopup
       objectReference: {fileID: 0}
+    - target: {fileID: 6917759109014089110, guid: c9af76d2808dd3747bac1097fc079867, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6278,11 +6284,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1020708132}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 84f67474708b539409ca7b0390468d6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageButtons: []
   settingsPopup: {fileID: 1020708132}
   StageSelectPopup: {fileID: 0}
 --- !u!114 &1020708135

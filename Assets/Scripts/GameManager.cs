@@ -25,7 +25,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     public static SoundManager Sound => SoundManager.Instance;
 
     public GameState State = GameState.None;
-    private int _stage = 0;
+    [SerializeField]private int _stage = 0;
     public int Stage => _stage;
 
     private int maxStage = 1;
