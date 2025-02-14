@@ -1,0 +1,23 @@
+# ninja log v5
+12	2593	7612655868904764	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	a3e1298fc383fc28
+85	814	7612655850442788	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	18b21fc91ec6afb3
+816	1793	7612655860855081	C:/Users/macham/Documents/GitHub/Exp-2025WinterGamejam/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/733m653p/obj/arm64-v8a/libswappywrapper.so	71eca1aed6c07af4
+35	2011	7612655862793700	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	c99ea0197ac32064
+54	2019	7612655862939899	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	89f6ed3ab7b3a0dc
+75	2161	7612655864618988	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	bb5bcf15fe5f8e9d
+26	2086	7612655863664739	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	57f1ce8f04c9a1ad
+2	2248	7612655865482360	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	331037e7e1024da8
+66	2092	7612655863745212	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	1abf08caa9157d71
+45	2471	7612655867677353	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	d0854c9bd9050f26
+2594	2843	7612655871435367	C:/Users/macham/Documents/GitHub/Exp-2025WinterGamejam/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/733m653p/obj/arm64-v8a/libgame.so	7c87916a77b86321
+65	304	7612658939619264	FramePacing/CMakeFiles/swappywrapper.dir/UnitySwappyWrapper.cpp.o	18b21fc91ec6afb3
+305	594	7612658942398357	C:/Users/macham/Documents/GitHub/Exp-2025WinterGamejam/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/733m653p/obj/arm64-v8a/libswappywrapper.so	71eca1aed6c07af4
+27	1060	7612658947050634	GameActivity/CMakeFiles/game.dir/UGAEntry.cpp.o	89f6ed3ab7b3a0dc
+42	1061	7612658947090896	GameActivity/CMakeFiles/game.dir/UGAInputKeyEvent.cpp.o	c99ea0197ac32064
+34	1091	7612658947404444	GameActivity/CMakeFiles/game.dir/UGAInputMotionEvent.cpp.o	1abf08caa9157d71
+6	1092	7612658947463000	GameActivity/CMakeFiles/game.dir/UGAConfiguration.cpp.o	57f1ce8f04c9a1ad
+58	1181	7612658948350761	GameActivity/CMakeFiles/game.dir/UGASoftKeyboard.cpp.o	bb5bcf15fe5f8e9d
+20	1209	7612658948648019	GameActivity/CMakeFiles/game.dir/UGADebug.cpp.o	331037e7e1024da8
+50	1404	7612658950588618	GameActivity/CMakeFiles/game.dir/UGAInput.cpp.o	d0854c9bd9050f26
+13	1475	7612658951289968	GameActivity/CMakeFiles/game.dir/UGAApplication.cpp.o	a3e1298fc383fc28
+1476	1691	7612658953451318	C:/Users/macham/Documents/GitHub/Exp-2025WinterGamejam/Library/Bee/Android/Prj/IL2CPP/Gradle/unityLibrary/build/intermediates/cxx/RelWithDebInfo/733m653p/obj/arm64-v8a/libgame.so	7c87916a77b86321

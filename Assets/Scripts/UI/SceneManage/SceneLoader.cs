@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class SceneLoader : MonoBehaviour
 {
@@ -28,6 +30,7 @@ public class SceneLoader : MonoBehaviour
     //     SoundManager.Instance.MainBgmOn();
     //     Time.timeScale = 1.0f;
     // }
+
 
     public void LoadStage1()
     {
