@@ -31,6 +31,13 @@ public class GameManager : SingletonBehaviour<GameManager>
     [SerializeField]private int maxStage = 1;
     public int MaxStage => maxStage;
 
+    [ContextMenu("init max stage")]
+    public void InitMaxStage()
+    {
+        maxStage = 1;
+        PlayerPrefs.SetInt("MaxStage", maxStage);
+    }
+    
     private void OnEnable()
     {
         maxStage = PlayerPrefs.GetInt("MaxStage", 1);
@@ -44,6 +51,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     public void GoToMain()
     {
         State = GameState.Main;
+        SoundManager.Instance.StopBGM();
         SceneManager.LoadScene("Main");
         PlayerPrefs.SetInt("SkipIntro", 1);
     }

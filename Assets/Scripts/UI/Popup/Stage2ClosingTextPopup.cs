@@ -239,7 +239,7 @@ public class Stage2ClosingTextPopup : MonoBehaviour, IClearLisenter
         ClosingTextPanel.SetActive(false); // 패널 비활성화
         isFirstTime1 = false;
         Time.timeScale = 1f;
-        SceneManager.LoadScene("Stage3");
+        // SceneManager.LoadScene("Stage3");
         //Player.SetActive(true);
         ClearPopup.SetActive(true);
         //Fuel.SetActive(true);
