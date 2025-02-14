@@ -18,7 +18,7 @@ public class Main : MonoBehaviour
 
     private void OnEnable()
     {
-        int maxStage = PlayerPrefs.GetInt("MaxStage", 1); // 최대 스테이지 불러오기
+        int maxStage = GameManager.Instance.MaxStage;
         for (int i = 0; i < stageButtons.Length; i++)
         {
             bool isInteractable = i < maxStage; // 클리어한 스테이지까지만 버튼 활성화
@@ -49,6 +49,15 @@ public class Main : MonoBehaviour
     public void CloseStageSelectPopup()
     {
         StageSelectPopup.SetActive(false);
+    }
+    
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
     }
 
 }

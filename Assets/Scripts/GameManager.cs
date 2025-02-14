@@ -28,7 +28,7 @@ public class GameManager : SingletonBehaviour<GameManager>
     [SerializeField]private int _stage = 0;
     public int Stage => _stage;
 
-    private int maxStage = 1;
+    [SerializeField]private int maxStage = 1;
     public int MaxStage => maxStage;
 
     private void OnEnable()

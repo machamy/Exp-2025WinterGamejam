@@ -566,6 +566,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f67474708b539409ca7b0390468d6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageButtons: []
   settingsPopup: {fileID: 114109198}
   StageSelectPopup: {fileID: 0}
 --- !u!114 &114109201
@@ -5785,6 +5786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f67474708b539409ca7b0390468d6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageButtons: []
   settingsPopup: {fileID: 114109198}
   StageSelectPopup: {fileID: 0}
 --- !u!114 &1265925519
@@ -6329,51 +6331,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 5710260631187047063, guid: 2c386e33c62d9f841afe79dcab2a0353, type: 3}
   m_PrefabInstance: {fileID: 855436708}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1388277974
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1388277975}
-  - component: {fileID: 1388277976}
-  m_Layer: 0
-  m_Name: '@GameManager'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1388277975
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1388277974}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.423473, y: 2.5047429, z: -0.2897918}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1388277976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1388277974}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b888fca218d8ea948ac1a7884d5b1b4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  State: 3
 --- !u!4 &1391676491 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5710260631187047063, guid: 2c386e33c62d9f841afe79dcab2a0353, type: 3}
@@ -8074,6 +8031,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f67474708b539409ca7b0390468d6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageButtons: []
   settingsPopup: {fileID: 114109198}
   StageSelectPopup: {fileID: 0}
 --- !u!114 &1770009457
@@ -9836,7 +9794,6 @@ SceneRoots:
   - {fileID: 1903671980}
   - {fileID: 2138630966}
   - {fileID: 1049068237}
-  - {fileID: 1388277975}
   - {fileID: 564496237}
   - {fileID: 251908665}
   - {fileID: 499578091}

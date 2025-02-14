@@ -217,7 +217,7 @@ public class Stage1ClosingTextPopup : MonoBehaviour, IClearLisenter
         yield return StartCoroutine(NormalChat("", "점슬이는 당신에게 엎혀 우주선에 올라탔습니다."));
         if (Passengers.Value.Contains(1))
         {
-            Passengers.Value.Remove(1);
+            Passengers.Value.Add(1);
         }
         CloseClosingText();
     }
@@ -238,7 +238,7 @@ public class Stage1ClosingTextPopup : MonoBehaviour, IClearLisenter
         isFirstTime1 = false;
         Time.timeScale = 1f;
         //Player.SetActive(true);
-ClearPopup.SetActive(true);
+        ClearPopup.SetActive(true);
         //Fuel.SetActive(true);
     }
 }

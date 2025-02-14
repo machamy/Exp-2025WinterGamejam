@@ -2002,6 +2002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f67474708b539409ca7b0390468d6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageButtons: []
   settingsPopup: {fileID: 2049118436}
   StageSelectPopup: {fileID: 0}
 --- !u!114 &364076018
@@ -5355,51 +5356,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1207175252208262241, guid: c5121986b247ef642ba1151375b0c607, type: 3}
   m_PrefabInstance: {fileID: 900205422}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &926215719
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 926215721}
-  - component: {fileID: 926215720}
-  m_Layer: 0
-  m_Name: '@GameManager'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &926215720
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 926215719}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b888fca218d8ea948ac1a7884d5b1b4c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  State: 3
---- !u!4 &926215721
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 926215719}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.423473, y: 2.5047429, z: -0.2897918}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &940630426
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7777,6 +7733,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f67474708b539409ca7b0390468d6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageButtons: []
   settingsPopup: {fileID: 2049118436}
   StageSelectPopup: {fileID: 0}
 --- !u!114 &1574735995
@@ -9729,6 +9686,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f67474708b539409ca7b0390468d6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stageButtons: []
   settingsPopup: {fileID: 2049118436}
   StageSelectPopup: {fileID: 0}
 --- !u!114 &2049118439
@@ -10713,7 +10671,6 @@ SceneRoots:
   - {fileID: 632985003}
   - {fileID: 1566014067}
   - {fileID: 350648221}
-  - {fileID: 926215721}
   - {fileID: 692313770}
   - {fileID: 741463004}
   - {fileID: 1259863614}
