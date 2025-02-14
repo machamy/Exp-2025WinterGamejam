@@ -202,13 +202,13 @@ public class Stage3ClosingTextPopup : MonoBehaviour, IClearLisenter
     }
     IEnumerator ClosingText() //("등장인물", "대사")로 입력
     {
-        yield return StartCoroutine(NormalChat("포리아", "정말...왔구나..."));
-        yield return StartCoroutine(NormalChat("포리아", "부르긴 했지만 정말 올 줄은 몰랐어"));
-        yield return StartCoroutine(NormalChat("포리아", "난 별그물이야."));
-        yield return StartCoroutine(NormalChat("포리아", "사실 난 여기 있다고 해서 위험하진 않는데.."));
-        yield return StartCoroutine(NormalChat("포리아", "혼자는 외로워서.."));
-        yield return StartCoroutine(NormalChat("포리아", "나랑 있으면 위험할 수도 있지만.."));
-        yield return StartCoroutine(NormalChat("포리아", "나를 데려가줄래?"));
+        yield return StartCoroutine(NormalChat("별그물", "정말...왔구나..."));
+        yield return StartCoroutine(NormalChat("별그물", "부르긴 했지만 정말 올 줄은 몰랐어"));
+        yield return StartCoroutine(NormalChat("별그물", "난 별그물이야."));
+        yield return StartCoroutine(NormalChat("별그물", "사실 난 여기 있다고 해서 위험하진 않는데.."));
+        yield return StartCoroutine(NormalChat("별그물", "혼자는 외로워서.."));
+        yield return StartCoroutine(NormalChat("별그물", "나랑 있으면 위험할 수도 있지만.."));
+        yield return StartCoroutine(NormalChat("별그물", "나를 데려가줄래?"));
         SelectButton1.gameObject.SetActive(true);
         SelectButton2.gameObject.SetActive(true);
     }
@@ -230,7 +230,7 @@ public class Stage3ClosingTextPopup : MonoBehaviour, IClearLisenter
     IEnumerator TextSelect2() //("등장인물", "대사")로 입력
     {
         
-        yield return StartCoroutine(NormalChat("포리아", "음..그래.."));
+        yield return StartCoroutine(NormalChat("별그물", "음..그래.."));
 
         yield return StartCoroutine(NormalChat("", "별그물은 천천히 뒤돌아섰습니다. 혹시 벌써 후회하고 있나요?"));
         StartCoroutine(EndingText());

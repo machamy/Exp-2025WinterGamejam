@@ -215,7 +215,7 @@ public class Stage1ClosingTextPopup : MonoBehaviour, IClearLisenter
         yield return StartCoroutine(NormalChat("점슬이", "흥~♡ 내가 원해서 따라가는게 아니라구!"));
        
         yield return StartCoroutine(NormalChat("", "점슬이는 당신에게 엎혀 우주선에 올라탔습니다."));
-        if (Passengers.Value.Contains(1))
+        if (!Passengers.Value.Contains(1))
         {
             Passengers.Value.Add(1);
         }
