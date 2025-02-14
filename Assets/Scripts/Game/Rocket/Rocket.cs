@@ -8,7 +8,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 
-[RequireComponent(typeof(Rigidbody2D), typeof(FixedJoint2D))]
+[RequireComponent(typeof(Rigidbody2D), typeof(FixedJoint2D), typeof(RocketController))]
 public class Rocket : MonoBehaviour
 {
     [Header("References")]
@@ -138,6 +138,7 @@ public class Rocket : MonoBehaviour
     public void Launch()
     {
         State = RocketState.Normal;
+        GetComponent<RocketController>().enabled = true;
     }
 
     public void StartBoost()
@@ -427,12 +428,21 @@ public class Rocket : MonoBehaviour
         Debug.Log("Clear!!!");
         GameManager.Instance.StageClear();
         State = RocketState.Clear;
+        GetComponent<RocketController>().enabled = false;
         onClearEvent.Invoke();
     }
     public void Die()
     {
+        if(State == RocketState.Dead || State == RocketState.Clear)
+            return;
+        ForceDie();
+    }
+
+    public void ForceDie()
+    {
         State = RocketState.Dead;
         Debug.Log("Rocket Died");
+        GetComponent<RocketController>().enabled = false;
         SoundManager.Instance.PlayBGM(SoundData.Sound.GameOver);
         SoundManager.Instance.StopSFX();
         SoundManager.Instance.PlaySFX(SoundData.Sound.RocketExplosion, 1f);

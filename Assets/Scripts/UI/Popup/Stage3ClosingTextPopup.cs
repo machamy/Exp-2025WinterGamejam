@@ -275,7 +275,7 @@ public class Stage3ClosingTextPopup : MonoBehaviour, IClearLisenter
         IEnumerator GOHELL()
         {
             yield return  new WaitForSeconds(5f);
-            rocket.Die();
+            rocket.ForceDie();
         }
         StartCoroutine(GOHELL());
         //Player.SetActive(true);
