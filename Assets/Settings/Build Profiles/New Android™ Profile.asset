@@ -35,7 +35,9 @@ MonoBehaviour:
     - line: '|   useOnDemandResources: 0'
     - line: '|   accelerometerFrequency: 60'
     - line: '|   companyName: ExpStudio'
-    - line: '|   productName: Exp-2025WinterGamejam'
+    - line: '|   productName: "\uB300\uC6B0\uC8FC\uAD6C\uCD9C\uC791\uC804: \uB098\uB294
+        \uC678\uACC4\uC778\uC774'
+    - line: '|     \uC88B\uC544!"'
     - line: '|   defaultCursor: {instanceID: 0}'
     - line: '|   cursorHotspot: {x: 0, y: 0}'
     - line: '|   m_SplashScreenBackgroundColor: {r: 0.13725491, g: 0.12156863, b:
@@ -164,7 +166,7 @@ MonoBehaviour:
     - line: '|   loadStoreDebugModeEnabled: 0'
     - line: '|   visionOSBundleVersion: 1.0'
     - line: '|   tvOSBundleVersion: 1.0'
-    - line: '|   bundleVersion: 1.0'
+    - line: '|   bundleVersion: 1.2'
     - line: '|   preloadedAssets:'
     - line: '|   - {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100,
         type: 3}'
@@ -196,8 +198,8 @@ MonoBehaviour:
     - line: '|     VisionOS: 0'
     - line: '|     iPhone: 0'
     - line: '|     tvOS: 0'
-    - line: '|   overrideDefaultApplicationIdentifier: 0'
-    - line: '|   AndroidBundleVersionCode: 1'
+    - line: '|   overrideDefaultApplicationIdentifier: 1'
+    - line: '|   AndroidBundleVersionCode: 5'
     - line: '|   AndroidMinSdkVersion: 23'
     - line: '|   AndroidTargetSdkVersion: 0'
     - line: '|   AndroidPreferredInstallLocation: 1'
